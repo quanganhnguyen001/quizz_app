@@ -1,0 +1,11 @@
+{
+    "@@locale": "en",
+    "hello": "Hello",
+    "onboardTitle1" : "Learn anytime \nand anywhere",
+    "onboardTitle2" : "Find a course \nfor you",
+    "onboardTitle3" : "Improve your skills",
+    "onboardLabel" : "Quarantine is the perfect time to spend your \nday learning something new, from anywhere!",
+    "next" : "Next",
+    "start" : "Let’s Start",
+    "skip" : "Skip"
+  }
