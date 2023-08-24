@@ -41,6 +41,7 @@ class TextFieldComponents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textInputAction: TextInputAction.next,
       onSaved: onSaved,
       validator: validator,
       obscureText: obscureText ?? false,
