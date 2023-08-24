@@ -30,7 +30,6 @@ class _BaseScreenState extends State<BaseScreen> {
         return previous != current;
       },
       listener: (context, state) {
-        print(state);
         if (state is UnAuthenticated) {
           Navigator.of(context)
               .pushNamedAndRemoveUntil(LoginScreen.routeName, (route) => false);

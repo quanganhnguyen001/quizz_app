@@ -8,16 +8,15 @@ import 'package:flutter/material.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(UnAuthenticated());
+  AuthCubit() : super(AuthInitial());
 
   checkAuthentication() {
-    FirebaseAuth.instance.authStateChanges().listen((user) {
-      if (user != null) {
-        emit(Authenticated(user));
-      } else {
-        emit(UnAuthenticated());
-      }
-    });
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      emit(Authenticated(user));
+    } else {
+      emit(UnAuthenticated());
+    }
   }
 
   login(User? user) {

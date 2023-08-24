@@ -42,7 +42,6 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.of(context)
           .pushNamedAndRemoveUntil(OnboardScreens.routeName, (route) => false);
     } else {
-      print('111');
       context.read<AuthCubit>().checkAuthentication();
     }
   }
