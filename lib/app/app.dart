@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:od/app/app_theme/app_theme_cubit.dart';
+import 'package:od/common/cubit/cubit/user_cubit.dart';
 import 'package:od/features/auth/cubit/auth_cubit.dart';
+import 'package:od/features/auth/entities/user_model.dart';
 import 'package:od/features/forgot_pass/presentation/cubit/forgot_pass_cubit.dart';
 import 'package:od/features/forgot_pass/presentation/pages/forgot_password_screen.dart';
 
@@ -18,6 +20,8 @@ import 'package:od/features/register/presentation/pages/register_screen.dart';
 import 'package:od/features/settings/presentation/pages/settings_screen.dart';
 import 'package:od/features/todo/presentation/pages/add_todo_screen.dart';
 import 'package:od/features/todo/presentation/pages/edit_todo_screen.dart';
+import 'package:od/features/update_profile/presentation/cubit/update_profile_cubit.dart';
+import 'package:od/features/update_profile/presentation/pages/update_profile_widget.dart';
 
 import '../features/login/presentation/pages/login_screen.dart';
 import '../features/splash/presentation/pages/splash_screen.dart';
@@ -50,6 +54,12 @@ class _YinAppState extends State<YinApp> {
           BlocProvider<AppThemeCubit>(
             create: (context) => AppThemeCubit(),
           ),
+          BlocProvider<UserCubit>(
+            create: (context) => UserCubit()..loadUserData(),
+          ),
+          BlocProvider<UpdateProfileCubit>(
+            create: (context) => UpdateProfileCubit(),
+          ),
         ],
         child: BlocBuilder<AppLanguageCubit, AppLanguageState>(
           builder: (context, state) {
@@ -79,6 +89,18 @@ class _YinAppState extends State<YinApp> {
                     settings:
                         const RouteSettings(name: OnboardScreens.routeName),
                     builder: (_) => const OnboardScreens(),
+                  );
+                }
+                if (settings.name == UpdateProfile.routeName) {
+                  UpdateProfile args = settings.arguments as dynamic;
+                  return MaterialPageRoute(
+                    settings:
+                        const RouteSettings(name: UpdateProfile.routeName),
+                    builder: (_) => UpdateProfile(
+                      name: args.name,
+                      imageUrl: args.imageUrl,
+                      phone: args.phone,
+                    ),
                   );
                 }
                 if (settings.name == RegisterScreen.routeName) {
@@ -121,20 +143,7 @@ class _YinAppState extends State<YinApp> {
                     builder: (_) => AddTodo(listTodo: argument),
                   );
                 }
-                if (settings.name == ProfileScreen.routeName) {
-                  return MaterialPageRoute(
-                    settings:
-                        const RouteSettings(name: ProfileScreen.routeName),
-                    builder: (_) => const ProfileScreen(),
-                  );
-                }
-                if (settings.name == SettingsScreen.routeName) {
-                  return MaterialPageRoute(
-                    settings:
-                        const RouteSettings(name: SettingsScreen.routeName),
-                    builder: (_) => const SettingsScreen(),
-                  );
-                }
+
                 if (settings.name == ForgotPasswordScreen.routeName) {
                   return MaterialPageRoute(
                     settings: const RouteSettings(
