@@ -509,6 +509,16 @@ class Str {
       args: [],
     );
   }
+
+  /// `Vui lòng nhập số điện thoại`
+  String get valid_phone {
+    return Intl.message(
+      'Vui lòng nhập số điện thoại',
+      name: 'valid_phone',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Str> {

@@ -1,6 +1,6 @@
 part of 'home_cubit.dart';
 
-class HomeState {
+class HomeState extends Equatable {
   final int currentIndex;
 
   const HomeState({
@@ -14,4 +14,8 @@ class HomeState {
       currentIndex: currentIndex ?? this.currentIndex,
     );
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [currentIndex];
 }

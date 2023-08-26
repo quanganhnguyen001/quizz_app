@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:od/common/widgets/fields/textfield_components.dart';
+import 'package:od/features/auth/entities/user_model.dart';
 import 'package:od/theme/color_palettes.dart';
 import 'package:od/theme/typhography.dart';
 
@@ -8,7 +9,8 @@ import '../../../../gen/assets/assets.gen.dart';
 import '../../../../gen/localization/l10n.dart';
 
 class CourseScreen extends StatelessWidget {
-  const CourseScreen({super.key});
+  const CourseScreen({super.key, required this.user});
+  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class CourseScreen extends StatelessWidget {
                             color: ColorPalettes.darkColor),
                       ),
                       Text(
-                        'Quang Anh',
+                        user.name ?? '',
                         style: AppTextStyle.H3(
                             color: Color.fromRGBO(51, 51, 51, 1)),
                       )

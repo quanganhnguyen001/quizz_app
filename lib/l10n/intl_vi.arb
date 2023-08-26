@@ -45,6 +45,7 @@
   "update_info": "Cập nhật tài khoản",
   "save": "Lưu",
   "from_camera": "Chụp ảnh",
-  "from_gallery": "Thư viện ảnh"
+  "from_gallery": "Thư viện ảnh",
+  "valid_phone": "Vui lòng nhập số điện thoại"
 
 }

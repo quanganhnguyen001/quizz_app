@@ -3,8 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:od/features/settings/presentation/cubit/setting_cubit.dart';
 import 'package:od/features/settings/presentation/widgets/menu_item.dart';
-import 'package:od/features/settings/presentation/widgets/update_profile_widget.dart';
+import 'package:od/features/update_profile/presentation/pages/update_profile_widget.dart';
 import 'package:od/gen/localization/l10n.dart';
 
 import 'package:od/theme/color_palettes.dart';
@@ -19,8 +20,9 @@ import '../../../auth/entities/user_model.dart';
 import '../../../profile/presentation/widgets/cell_widget.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({super.key, required this.user});
   static const String routeName = '/SettingsScreen';
+  final UserModel user;
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -108,8 +110,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             InkWell(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => UpdateProfileWidget()));
+                Navigator.of(context).pushNamed(UpdateProfile.routeName,
+                    arguments: UpdateProfile(
+                        name: widget.user.name ?? '',
+                        phone: widget.user.phone ?? '',
+                        imageUrl: widget.user.imageUrl ?? ''));
               },
               child: MenuItem(
                 title: Str.of(context).update_info,
