@@ -5,6 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:od/common/widgets/buttons/toggle_buttons_components.dart';
 
 import 'package:od/features/todo/presentation/pages/add_todo_screen.dart';
+import 'package:od/features/todo/presentation/pages/edit_todo_arguments.dart';
 import 'package:od/features/todo/presentation/pages/edit_todo_screen.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -101,15 +102,14 @@ class _TodoScreenState extends State<TodoScreen> {
                       onTap: () {
                         Navigator.of(context)
                             .pushNamed(EditTodo.routeName,
-                                arguments: EditTodo(
-                                  listTodo: listTodo,
-                                  title: listTodo[index].title,
-                                  description: listTodo[index].description,
-                                  uid: listTodo[index].uid,
-                                  starttime: listTodo[index].startTime,
-                                  endTime: listTodo[index].endTime,
-                                  isDone: listTodo[index].isDone,
-                                ))
+                                arguments: EditTodoArg(
+                                    listTodo: listTodo,
+                                    title: listTodo[index].title,
+                                    description: listTodo[index].description,
+                                    uid: listTodo[index].uid,
+                                    isDone: listTodo[index].isDone,
+                                    starttime: listTodo[index].startTime,
+                                    endTime: listTodo[index].endTime))
                             .then(
                           (_) {
                             setState(() {});

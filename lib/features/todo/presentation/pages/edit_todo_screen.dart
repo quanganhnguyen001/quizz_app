@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:od/features/todo/presentation/pages/edit_todo_arguments.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:od/common/widgets/buttons/button_components.dart';
@@ -15,22 +16,10 @@ import '../../../../theme/typhography.dart';
 class EditTodo extends StatefulWidget {
   EditTodo({
     Key? key,
-    required this.listTodo,
-    required this.title,
-    required this.description,
-    required this.uid,
-    required this.starttime,
-    required this.endTime,
-    required this.isDone,
+    required this.arg,
   }) : super(key: key);
   static const String routeName = '/EditTodo';
-  final List<TodoModel> listTodo;
-  final String title;
-  final String description;
-  final String uid;
-  final String isDone;
-  String starttime;
-  String endTime;
+  final EditTodoArg arg;
 
   @override
   State<EditTodo> createState() => _EditTodoState();
@@ -43,13 +32,13 @@ class _EditTodoState extends State<EditTodo> {
   editTodo(String uid, String title, String description, String startTime,
       String endTime, String isDone) {
     final int index =
-        widget.listTodo.indexWhere((element) => element.uid == uid);
+        widget.arg.listTodo.indexWhere((element) => element.uid == uid);
     if (index > -1) {
-      widget.listTodo[index].title = title;
-      widget.listTodo[index].description = description;
-      widget.listTodo[index].startTime = startTime;
-      widget.listTodo[index].endTime = endTime;
-      final listTodoSave = widget.listTodo;
+      widget.arg.listTodo[index].title = title;
+      widget.arg.listTodo[index].description = description;
+      widget.arg.listTodo[index].startTime = startTime;
+      widget.arg.listTodo[index].endTime = endTime;
+      final listTodoSave = widget.arg.listTodo;
       setData(listTodoSave);
     }
   }
@@ -64,20 +53,20 @@ class _EditTodoState extends State<EditTodo> {
 
   selectStartTime(BuildContext context) async {
     final pickedStartTime = await showTimePicker(
-        context: context, initialTime: convertTime(widget.starttime));
-    if (pickedStartTime != null && pickedStartTime != widget.starttime) {
+        context: context, initialTime: convertTime(widget.arg.starttime));
+    if (pickedStartTime != null && pickedStartTime != widget.arg.starttime) {
       setState(() {
-        widget.starttime = pickedStartTime.toString();
+        widget.arg.starttime = pickedStartTime.toString();
       });
     }
   }
 
   selectEndTime(BuildContext context) async {
     final pickedEndTime = await showTimePicker(
-        context: context, initialTime: convertTime(widget.endTime));
-    if (pickedEndTime != null && pickedEndTime != widget.endTime) {
+        context: context, initialTime: convertTime(widget.arg.endTime));
+    if (pickedEndTime != null && pickedEndTime != widget.arg.endTime) {
       setState(() {
-        widget.endTime = pickedEndTime.toString();
+        widget.arg.endTime = pickedEndTime.toString();
       });
     }
   }
@@ -92,8 +81,8 @@ class _EditTodoState extends State<EditTodo> {
 
   @override
   void initState() {
-    titleController.text = widget.title;
-    descriptionController.text = widget.description;
+    titleController.text = widget.arg.title;
+    descriptionController.text = widget.arg.description;
     super.initState();
   }
 
@@ -139,7 +128,7 @@ class _EditTodoState extends State<EditTodo> {
                     selectStartTime(context);
                   },
                   child: Text(
-                    'Start Time: ${widget.starttime.toString().substring(10, 15)}',
+                    'Start Time: ${widget.arg.starttime.toString().substring(10, 15)}',
                     style: const TextStyle(color: ColorPalettes.secondaryColor),
                   )),
               TextButton(
@@ -147,7 +136,7 @@ class _EditTodoState extends State<EditTodo> {
                     selectEndTime(context);
                   },
                   child: Text(
-                      'End Time: ${widget.endTime.toString().substring(10, 15)}',
+                      'End Time: ${widget.arg.endTime.toString().substring(10, 15)}',
                       style: const TextStyle(color: Colors.red))),
             ],
           ),
@@ -160,12 +149,12 @@ class _EditTodoState extends State<EditTodo> {
               ButtonComponents(
                 onPressed: () {
                   editTodo(
-                      widget.uid,
+                      widget.arg.uid,
                       titleController.text,
                       descriptionController.text,
-                      widget.starttime,
-                      widget.endTime,
-                      widget.isDone);
+                      widget.arg.starttime,
+                      widget.arg.endTime,
+                      widget.arg.isDone);
                   Navigator.of(context).pop();
                 },
                 backgroundColor: Colors.red,

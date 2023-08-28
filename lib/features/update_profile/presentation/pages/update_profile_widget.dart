@@ -16,18 +16,15 @@ import '../../../../common/widgets/buttons/button_components.dart';
 import '../../../../common/widgets/fields/textfield_components.dart';
 import '../../../../gen/assets/assets.gen.dart';
 import '../../../../theme/color_palettes.dart';
+import 'update_profile_arg.dart';
 
 class UpdateProfile extends StatefulWidget {
   static const String routeName = '/UpdateProfileWidget';
-  const UpdateProfile(
-      {super.key,
-      required this.name,
-      required this.phone,
-      required this.imageUrl});
-  final String name;
-  final String phone;
-  final String imageUrl;
-
+  const UpdateProfile({
+    super.key,
+    required this.arg,
+  });
+  final UpdateProfileArg arg;
   @override
   State<UpdateProfile> createState() => _UpdateProfileState();
 }
@@ -35,8 +32,8 @@ class UpdateProfile extends StatefulWidget {
 class _UpdateProfileState extends State<UpdateProfile> {
   @override
   void initState() {
-    context.read<UpdateProfileCubit>().nameController.text = widget.name;
-    context.read<UpdateProfileCubit>().phoneController.text = widget.phone;
+    context.read<UpdateProfileCubit>().nameController.text = widget.arg.name;
+    context.read<UpdateProfileCubit>().phoneController.text = widget.arg.phone;
 
     super.initState();
   }
@@ -79,84 +76,30 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         ),
                         InkWell(
                             onTap: () {
-                              showModalBottomSheet(
-                                  context: context,
-                                  builder: (ctx) {
-                                    return Container(
-                                        height: 150,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 16, vertical: 16),
-                                          child: Column(children: [
-                                            InkWell(
-                                              onTap: () {
-                                                ctx
-                                                    .read<UpdateProfileCubit>()
-                                                    .selectImage(true);
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.camera,
-                                                    size: 40,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 16,
-                                                  ),
-                                                  Text(
-                                                    Str.of(context).from_camera,
-                                                    style: TextStyle(
-                                                      fontSize: 20,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 16,
-                                            ),
-                                            InkWell(
-                                              onTap: () async {
-                                                ctx
-                                                    .read<UpdateProfileCubit>()
-                                                    .selectImage(false);
-                                              },
-                                              child: Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.image,
-                                                    size: 40,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 16,
-                                                  ),
-                                                  Text(
-                                                    Str.of(context)
-                                                        .from_gallery,
-                                                    style: TextStyle(
-                                                      fontSize: 20,
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ]),
-                                        ));
-                                  });
+                              showImageBottomSheet(ontap1: () {
+                                context
+                                    .read<UpdateProfileCubit>()
+                                    .selectImage(ImageSource.camera);
+                              }, ontap2: () {
+                                context
+                                    .read<UpdateProfileCubit>()
+                                    .selectImage(ImageSource.gallery);
+                              });
                             },
                             child: state.selectedImage.isEmpty
                                 ? Center(
                                     child: Container(
                                         height: 155,
+                                        width: 140,
                                         decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             border: Border.all(
                                                 width: 3,
                                                 color: ColorPalettes
                                                     .secondaryColor)),
-                                        child: ClipOval(
-                                            child: Image.network(
-                                                widget.imageUrl))),
+                                        child: CircleAvatar(
+                                            backgroundImage: NetworkImage(
+                                                widget.arg.imageUrl))),
                                   )
                                 : Container(
                                     height: 155,
@@ -250,5 +193,66 @@ class _UpdateProfileState extends State<UpdateProfile> {
         },
       ),
     );
+  }
+
+  showImageBottomSheet({
+    required void Function() ontap1,
+    required void Function() ontap2,
+  }) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (ctx) {
+          return Container(
+              height: 150,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                child: Column(children: [
+                  InkWell(
+                    onTap: ontap1,
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.camera,
+                          size: 40,
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Text(
+                          Str.of(context).from_camera,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  InkWell(
+                    onTap: ontap2,
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.image,
+                          size: 40,
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Text(
+                          Str.of(context).from_gallery,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ]),
+              ));
+        });
   }
 }

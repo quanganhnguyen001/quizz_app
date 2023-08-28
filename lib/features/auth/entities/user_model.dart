@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-class UserModel {
+import 'package:equatable/equatable.dart';
+
+class UserModel extends Equatable {
   final String? uid;
   final String? name;
   final String? email;
@@ -50,4 +52,8 @@ class UserModel {
 
   factory UserModel.fromJson(String source) =>
       UserModel.fromMap(json.decode(source));
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [uid, name];
 }

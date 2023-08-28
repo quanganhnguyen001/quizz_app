@@ -1,15 +1,15 @@
-part of 'onboarding_cubit.dart';
+// part of 'onboarding_cubit.dart';
 
-class OnboardingState extends Equatable {
-  const OnboardingState({
-    required this.currentIndex,
-  });
-  final int currentIndex;
+// class OnboardingState extends Equatable {
+//   const OnboardingState({
+//     required this.currentIndex,
+//   });
+//   final int currentIndex;
 
-  @override
-  List<Object> get props => [];
+//   @override
+//   List<Object> get props => [];
 
-  OnboardingState copyWith({int? currentIndex}) {
-    return OnboardingState(currentIndex: currentIndex ?? this.currentIndex);
-  }
-}
+//   OnboardingState copyWith({int? currentIndex}) {
+//     return OnboardingState(currentIndex: currentIndex ?? this.currentIndex);
+//   }
+// }

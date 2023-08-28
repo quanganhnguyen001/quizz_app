@@ -21,9 +21,8 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   TextEditingController phoneController = TextEditingController();
   XFile? file;
 
-  Future<void> selectImage(bool imageFrom) async {
-    file = await ImagePicker().pickImage(
-        source: imageFrom ? ImageSource.camera : ImageSource.gallery);
+  Future<void> selectImage(ImageSource imageSource) async {
+    file = await ImagePicker().pickImage(source: imageSource);
 
     if (file != null) {
       emit(state.copyWith(file?.name));
@@ -37,7 +36,10 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
           .ref()
           .child('userImage')
           .child('/' + FirebaseAuth.instance.currentUser!.uid);
-      await ref.putFile(File(file?.path ?? ''));
+      if (file != null) {
+        await ref.putFile(File(file?.path ?? ''));
+      }
+
       String imageUrl = await ref.getDownloadURL();
       FirebaseFirestore.instance
           .collection('users')

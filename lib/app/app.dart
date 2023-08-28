@@ -13,14 +13,17 @@ import 'package:od/features/forgot_pass/presentation/pages/forgot_password_scree
 import 'package:od/features/home/presentation/cubit/home_cubit.dart';
 import 'package:od/features/home/presentation/pages/home_screen.dart';
 import 'package:od/features/login/presentation/cubit/login_cubit.dart';
+import 'package:od/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:od/features/onboarding/presentation/pages/onboard_screens.dart';
 import 'package:od/features/profile/presentation/pages/profile_screen.dart';
 import 'package:od/features/register/presentation/cubit/register_cubit.dart';
 import 'package:od/features/register/presentation/pages/register_screen.dart';
 import 'package:od/features/settings/presentation/pages/settings_screen.dart';
 import 'package:od/features/todo/presentation/pages/add_todo_screen.dart';
+import 'package:od/features/todo/presentation/pages/edit_todo_arguments.dart';
 import 'package:od/features/todo/presentation/pages/edit_todo_screen.dart';
 import 'package:od/features/update_profile/presentation/cubit/update_profile_cubit.dart';
+import 'package:od/features/update_profile/presentation/pages/update_profile_arg.dart';
 import 'package:od/features/update_profile/presentation/pages/update_profile_widget.dart';
 
 import '../features/login/presentation/pages/login_screen.dart';
@@ -57,9 +60,6 @@ class _YinAppState extends State<YinApp> {
           BlocProvider<UserCubit>(
             create: (context) => UserCubit()..loadUserData(),
           ),
-          BlocProvider<UpdateProfileCubit>(
-            create: (context) => UpdateProfileCubit(),
-          ),
         ],
         child: BlocBuilder<AppLanguageCubit, AppLanguageState>(
           builder: (context, state) {
@@ -88,19 +88,17 @@ class _YinAppState extends State<YinApp> {
                   return MaterialPageRoute(
                     settings:
                         const RouteSettings(name: OnboardScreens.routeName),
-                    builder: (_) => const OnboardScreens(),
+                    builder: (_) => OnboardScreens(),
                   );
                 }
                 if (settings.name == UpdateProfile.routeName) {
-                  UpdateProfile args = settings.arguments as dynamic;
+                  final args = settings.arguments as UpdateProfileArg;
                   return MaterialPageRoute(
                     settings:
                         const RouteSettings(name: UpdateProfile.routeName),
-                    builder: (_) => UpdateProfile(
-                      name: args.name,
-                      imageUrl: args.imageUrl,
-                      phone: args.phone,
-                    ),
+                    builder: (_) => BlocProvider(
+                        create: (context) => UpdateProfileCubit(),
+                        child: UpdateProfile(arg: args)),
                   );
                 }
                 if (settings.name == RegisterScreen.routeName) {
@@ -155,19 +153,11 @@ class _YinAppState extends State<YinApp> {
                   );
                 }
                 if (settings.name == EditTodo.routeName) {
-                  return MaterialPageRoute(
+                  final arg = settings.arguments as EditTodoArg;
+                  return MaterialPageRoute<EditTodoArg>(
                       settings: const RouteSettings(name: EditTodo.routeName),
                       builder: (_) {
-                        EditTodo args = settings.arguments as dynamic;
-                        return EditTodo(
-                          listTodo: args.listTodo,
-                          description: args.description,
-                          title: args.title,
-                          uid: args.uid,
-                          starttime: args.starttime,
-                          endTime: args.endTime,
-                          isDone: args.isDone,
-                        );
+                        return EditTodo(arg: arg);
                       });
                 }
 

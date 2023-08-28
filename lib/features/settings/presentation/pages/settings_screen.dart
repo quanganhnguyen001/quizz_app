@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:od/features/settings/presentation/cubit/setting_cubit.dart';
 import 'package:od/features/settings/presentation/widgets/menu_item.dart';
+import 'package:od/features/update_profile/presentation/pages/update_profile_arg.dart';
 import 'package:od/features/update_profile/presentation/pages/update_profile_widget.dart';
 import 'package:od/gen/localization/l10n.dart';
 
@@ -111,7 +112,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             InkWell(
               onTap: () {
                 Navigator.of(context).pushNamed(UpdateProfile.routeName,
-                    arguments: UpdateProfile(
+                    arguments: UpdateProfileArg(
                         name: widget.user.name ?? '',
                         phone: widget.user.phone ?? '',
                         imageUrl: widget.user.imageUrl ?? ''));
