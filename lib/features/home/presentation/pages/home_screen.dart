@@ -35,9 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
               CourseScreen(
                 user: userState.user ?? UserModel(),
               ),
-              ProfileScreen(
-                user: userState.user ?? UserModel(),
-              ),
+              ProfileScreen(),
               SettingsScreen(
                 user: userState.user ?? UserModel(),
               ),

@@ -5,5 +5,5 @@ class UserState extends Equatable {
   final UserModel? user;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [user];
 }
