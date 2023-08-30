@@ -7,12 +7,16 @@ import 'package:od/app/app_theme/app_theme_cubit.dart';
 import 'package:od/common/cubit/cubit/user_cubit.dart';
 import 'package:od/features/auth/cubit/auth_cubit.dart';
 import 'package:od/features/auth/entities/user_model.dart';
+import 'package:od/features/chat_gpt/presentation/cubit/chat_gpt_cubit.dart';
+import 'package:od/features/chat_gpt/presentation/pages/chat_gpt_screen.dart';
+
 import 'package:od/features/forgot_pass/presentation/cubit/forgot_pass_cubit.dart';
 import 'package:od/features/forgot_pass/presentation/pages/forgot_password_screen.dart';
 
 import 'package:od/features/home/presentation/cubit/home_cubit.dart';
 import 'package:od/features/home/presentation/pages/home_screen.dart';
 import 'package:od/features/login/presentation/cubit/login_cubit.dart';
+
 import 'package:od/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:od/features/onboarding/presentation/pages/onboard_screens.dart';
 import 'package:od/features/profile/presentation/pages/profile_screen.dart';
@@ -119,12 +123,23 @@ class _YinAppState extends State<YinApp> {
                     builder: (_) => const UITestingWidget(),
                   );
                 }
+
                 if (settings.name == LoginScreen.routeName) {
                   return MaterialPageRoute(
                     settings: const RouteSettings(name: LoginScreen.routeName),
                     builder: (_) => BlocProvider<LoginCubit>(
                       create: (context) => LoginCubit(),
                       child: LoginScreen(),
+                    ),
+                  );
+                }
+                if (settings.name == ChatGptScreen.routeName) {
+                  return MaterialPageRoute(
+                    settings:
+                        const RouteSettings(name: ChatGptScreen.routeName),
+                    builder: (_) => BlocProvider(
+                      create: (context) => ChatGptCubit(),
+                      child: ChatGptScreen(),
                     ),
                   );
                 }

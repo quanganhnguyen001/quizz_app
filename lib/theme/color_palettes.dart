@@ -8,4 +8,6 @@ class ColorPalettes {
   static const Color lightGrayColor = Color.fromRGBO(248, 242, 238, 1);
   static const Color grayColor = Color.fromRGBO(190, 186, 179, 1);
   static const Color primaryColor = Color.fromRGBO(227, 86, 42, 1);
+  static const Color chatGptBackgroundColor = Color(0xFF343541);
+  static const Color cardColor = Color(0xFF444654);
 }
