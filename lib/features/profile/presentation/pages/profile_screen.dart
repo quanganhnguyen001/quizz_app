@@ -106,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 CellWidget(
                   icon: const Icon(
-                    Icons.email,
+                    Icons.phone,
                     color: ColorPalettes.whiteColor,
                     size: 30,
                   ),

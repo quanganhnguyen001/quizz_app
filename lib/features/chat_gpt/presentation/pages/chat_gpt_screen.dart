@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:od/features/chat_gpt/presentation/cubit/chat_gpt_cubit.dart';
+import 'package:od/features/chat_gpt/presentation/widgets/drop_down_button.dart';
 import 'package:od/features/course/presentation/widgets/chat_widget.dart';
 import 'package:od/features/course/presentation/widgets/text_widget.dart';
 import 'package:od/gen/assets/assets.gen.dart';
+import 'package:od/repositories/chat_gpt_repo.dart';
 import 'package:od/theme/color_palettes.dart';
 import 'package:od/theme/typhography.dart';
 import 'package:od/widgets_catalog/screen/base_screen/base_screen.dart';
@@ -104,7 +106,9 @@ class _ChatGptScreenState extends State<ChatGptScreen> {
                           ),
                         )),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              await ChatGptRepo().getModel();
+                            },
                             icon: Icon(
                               Icons.send,
                               color: Colors.white,
@@ -131,13 +135,19 @@ class _ChatGptScreenState extends State<ChatGptScreen> {
             child: Container(
               width: double.infinity,
               height: 50,
-              child: Row(
-                children: [
-                  TextWidget(
-                    label: 'Choose Model:',
-                    fontSize: 16,
-                  )
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextWidget(
+                        label: 'Choose Model:',
+                        fontSize: 16,
+                      ),
+                    ),
+                    DropDownButtonWidget()
+                  ],
+                ),
               ),
             ),
           );
