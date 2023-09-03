@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "12167641124",
+    "firebase_url": "https://quizzapp-d56de-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "quizzapp-d56de",
+    "storage_bucket": "quizzapp-d56de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12167641124:android:df8937825e7df790a480b1",
+        "android_client_info": {
+          "package_name": "com.wangyin.od"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12167641124-k31tnnng040524nqn708kubvjarkq7hh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdBYqBLhy0WCeOKo9MxnB-LhIfyHbKi-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12167641124-k31tnnng040524nqn708kubvjarkq7hh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
