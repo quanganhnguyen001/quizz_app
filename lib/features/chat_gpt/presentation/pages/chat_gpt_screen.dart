@@ -1,15 +1,21 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:od/features/chat_gpt/domain/entities/chatgpt_message_model.dart';
 import 'package:od/features/chat_gpt/presentation/cubit/chat_gpt_cubit.dart';
-import 'package:od/features/chat_gpt/presentation/widgets/drop_down_button.dart';
-import 'package:od/features/course/presentation/widgets/chat_widget.dart';
-import 'package:od/features/course/presentation/widgets/text_widget.dart';
+
+import 'package:od/features/chat_gpt/presentation/widgets/chat_widget.dart';
+import 'package:od/features/chat_gpt/presentation/widgets/text_widget.dart';
 import 'package:od/gen/assets/assets.gen.dart';
 import 'package:od/repositories/chat_gpt_repo.dart';
 import 'package:od/theme/color_palettes.dart';
 import 'package:od/theme/typhography.dart';
 import 'package:od/widgets_catalog/screen/base_screen/base_screen.dart';
+
+import '../../../../gen/localization/l10n.dart';
 
 class ChatGptScreen extends StatefulWidget {
   const ChatGptScreen({super.key});
@@ -20,6 +26,11 @@ class ChatGptScreen extends StatefulWidget {
 }
 
 class _ChatGptScreenState extends State<ChatGptScreen> {
+  List<ChatModel> chatList = [];
+  bool isTyping = false;
+  final listScrollController = ScrollController();
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return BaseScreen(scaffold: (ctx) {
@@ -40,16 +51,6 @@ class _ChatGptScreenState extends State<ChatGptScreen> {
                   color: Colors.white,
                 ),
               ),
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      buildBottomSheet();
-                    },
-                    icon: Icon(
-                      Icons.more_vert,
-                      color: Colors.white,
-                    ))
-              ],
               title: Row(
                 children: [
                   Assets.images.openaiLogo.image(height: 40, width: 40),
@@ -64,60 +65,75 @@ class _ChatGptScreenState extends State<ChatGptScreen> {
               ),
             ),
             body: SafeArea(
-                child: Column(
-              children: [
-                Flexible(
-                  child: ListView.builder(
-                      itemCount: 6,
-                      itemBuilder: (context, index) {
-                        return ChatWidget(
-                          message: chatMessages[index]['msg'].toString(),
-                          chatIndex: int.tryParse(chatMessages[index]
-                                      ['chatIndex']
-                                  .toString()) ??
-                              0,
-                        );
-                      }),
-                ),
-                state.isTyping
-                    ? Container()
-                    : SpinKitThreeBounce(
-                        color: Colors.white,
-                        size: 18,
-                      ),
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  color: ColorPalettes.cardColor,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child: TextField(
-                          style: TextStyle(color: Colors.white),
-                          controller:
-                              context.read<ChatGptCubit>().chatController,
-                          decoration: InputDecoration(
-                            hintText: 'How can I help you',
-                            hintStyle: AppTextStyle.paragraphMedium(
-                                color: Colors.grey),
-                          ),
-                        )),
-                        IconButton(
-                            onPressed: () async {
-                              await ChatGptRepo().getModel();
-                            },
-                            icon: Icon(
-                              Icons.send,
-                              color: Colors.white,
-                            ))
-                      ],
-                    ),
+                child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  Flexible(
+                    child: ListView.builder(
+                        controller: listScrollController,
+                        itemCount: chatList.length,
+                        itemBuilder: (context, index) {
+                          return ChatWidget(
+                            message: chatList[index].message,
+                            chatIndex: chatList[index].chatIndex,
+                            showAnimate: chatList.length - 1 == index,
+                          );
+                        }),
                   ),
-                )
-              ],
+                  isTyping
+                      ? SpinKitThreeBounce(
+                          color: Colors.white,
+                          size: 18,
+                        )
+                      : Container(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    color: ColorPalettes.cardColor,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Pls enter some text';
+                              }
+                              return null;
+                            },
+                            onFieldSubmitted: (value) async {
+                              if (formKey.currentState!.validate()) {
+                                sendMessageFCT();
+                              }
+                            },
+                            style: TextStyle(color: Colors.white),
+                            controller:
+                                context.read<ChatGptCubit>().chatController,
+                            decoration: InputDecoration(
+                              hintText: 'How can I help you',
+                              hintStyle: AppTextStyle.paragraphMedium(
+                                  color: Colors.grey),
+                            ),
+                          )),
+                          IconButton(
+                              onPressed: () async {
+                                if (formKey.currentState!.validate()) {
+                                  sendMessageFCT();
+                                }
+                              },
+                              icon: Icon(
+                                Icons.send,
+                                color: Colors.white,
+                              ))
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             )),
           );
         },
@@ -125,62 +141,66 @@ class _ChatGptScreenState extends State<ChatGptScreen> {
     });
   }
 
-  buildBottomSheet() {
-    return showModalBottomSheet(
-        backgroundColor: ColorPalettes.chatGptBackgroundColor,
-        context: context,
-        builder: (context) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: double.infinity,
-              height: 50,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextWidget(
-                        label: 'Choose Model:',
-                        fontSize: 16,
-                      ),
-                    ),
-                    DropDownButtonWidget()
-                  ],
-                ),
+  scrollListToEnd() {
+    listScrollController.animateTo(
+        listScrollController.position.maxScrollExtent,
+        duration: Duration(seconds: 2),
+        curve: Curves.easeOut);
+  }
+
+  Future sendMessageFCT() async {
+    if (isTyping) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            Future.delayed((const Duration(seconds: 2)), () {
+              Navigator.of(context).pop();
+            });
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              title: Assets.images.alertPassword.image(height: 56),
+              content: Text(
+                'You cant send multiple message at a time',
+                textAlign: TextAlign.center,
+                style: AppTextStyle.H4(color: Colors.red),
               ),
-            ),
-          );
-        });
+            );
+          });
+      return;
+    }
+    try {
+      String message = context.read<ChatGptCubit>().chatController.text;
+      setState(() {
+        isTyping = true;
+        chatList.add(ChatModel(message: message, chatIndex: 0));
+        context.read<ChatGptCubit>().chatController.clear();
+      });
+      chatList.addAll(await ChatGptRepo().sendMessage(message: message));
+      setState(() {});
+    } catch (e) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            Future.delayed((const Duration(seconds: 2)), () {
+              Navigator.of(context).pop();
+            });
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              title: Assets.images.alertPassword.image(height: 56),
+              content: Text(
+                'Some error occured pls try again',
+                textAlign: TextAlign.center,
+                style: AppTextStyle.H4(color: Colors.red),
+              ),
+            );
+          });
+    } finally {
+      setState(() {
+        scrollListToEnd();
+        isTyping = false;
+      });
+    }
   }
 }
-
-final chatMessages = [
-  {
-    "msg": "Hello who are you?",
-    "chatIndex": 0,
-  },
-  {
-    "msg":
-        "Hello, I am ChatGPT, a large language model developed by OpenAI. I am here to assist you with any information or questions you may have. How can I help you today?",
-    "chatIndex": 1,
-  },
-  {
-    "msg": "What is flutter?",
-    "chatIndex": 0,
-  },
-  {
-    "msg":
-        "Flutter is an open-source mobile application development framework created by Google. It is used to develop applications for Android, iOS, Linux, Mac, Windows, and the web. Flutter uses the Dart programming language and allows for the creation of high-performance, visually attractive, and responsive apps. It also has a growing and supportive community, and offers many customizable widgets for building beautiful and responsive user interfaces.",
-    "chatIndex": 1,
-  },
-  {
-    "msg": "Okay thanks",
-    "chatIndex": 0,
-  },
-  {
-    "msg":
-        "You're welcome! Let me know if you have any other questions or if there's anything else I can help you with.",
-    "chatIndex": 1,
-  },
-];
