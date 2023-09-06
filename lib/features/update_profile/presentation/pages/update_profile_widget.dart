@@ -16,7 +16,7 @@ import '../../../../common/widgets/buttons/button_components.dart';
 import '../../../../common/widgets/fields/textfield_components.dart';
 import '../../../../gen/assets/assets.gen.dart';
 import '../../../../theme/color_palettes.dart';
-import 'update_profile_arg.dart';
+import '../widgets/update_profile_arg.dart';
 
 class UpdateProfile extends StatefulWidget {
   static const String routeName = '/UpdateProfileWidget';

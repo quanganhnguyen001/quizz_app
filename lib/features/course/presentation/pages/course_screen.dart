@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:od/common/widgets/fields/textfield_components.dart';
 import 'package:od/features/auth/entities/user_model.dart';
 import 'package:od/features/chat_gpt/presentation/pages/chat_gpt_screen.dart';
+import 'package:od/features/course/presentation/widgets/details_course_screen.dart';
 
 import 'package:od/theme/color_palettes.dart';
 import 'package:od/theme/typhography.dart';
@@ -142,7 +143,11 @@ class CourseScreen extends StatelessWidget {
                           child: HeaderButtonComponents(
                             height: 40,
                             icon: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        DetailsCourseScreen()));
+                              },
                               icon: Icon(
                                 Icons.play_arrow,
                                 color: Colors.green,

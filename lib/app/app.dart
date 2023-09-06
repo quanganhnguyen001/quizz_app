@@ -20,6 +20,7 @@ import 'package:od/features/login/presentation/cubit/login_cubit.dart';
 import 'package:od/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:od/features/onboarding/presentation/pages/onboard_screens.dart';
 import 'package:od/features/profile/presentation/pages/profile_screen.dart';
+import 'package:od/features/question/presentation/pages/question_screen.dart';
 import 'package:od/features/register/presentation/cubit/register_cubit.dart';
 import 'package:od/features/register/presentation/pages/register_screen.dart';
 import 'package:od/features/settings/presentation/pages/settings_screen.dart';
@@ -27,7 +28,7 @@ import 'package:od/features/todo/presentation/pages/add_todo_screen.dart';
 import 'package:od/features/todo/presentation/pages/edit_todo_arguments.dart';
 import 'package:od/features/todo/presentation/pages/edit_todo_screen.dart';
 import 'package:od/features/update_profile/presentation/cubit/update_profile_cubit.dart';
-import 'package:od/features/update_profile/presentation/pages/update_profile_arg.dart';
+import 'package:od/features/update_profile/presentation/widgets/update_profile_arg.dart';
 import 'package:od/features/update_profile/presentation/pages/update_profile_widget.dart';
 
 import '../features/login/presentation/pages/login_screen.dart';
@@ -113,6 +114,13 @@ class _YinAppState extends State<YinApp> {
                       create: (context) => RegisterCubit(),
                       child: RegisterScreen(),
                     ),
+                  );
+                }
+                if (settings.name == QuestionScreen.routeName) {
+                  return MaterialPageRoute(
+                    settings:
+                        const RouteSettings(name: QuestionScreen.routeName),
+                    builder: (_) => const QuestionScreen(),
                   );
                 }
 
