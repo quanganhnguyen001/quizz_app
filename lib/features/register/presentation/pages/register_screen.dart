@@ -174,7 +174,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             title: Str.of(context).signup,
                             textStyle: AppTextStyle.buttonMedium(
                                 color: ColorPalettes.whiteColor),
-                            backgroundColor: Colors.red,
+                            backgroundColor: ColorPalettes.primaryColor,
                           ),
                         ],
                       ),

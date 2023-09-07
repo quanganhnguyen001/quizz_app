@@ -186,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             title: Str.of(context).login,
                             textStyle: AppTextStyle.buttonMedium(
                                 color: ColorPalettes.whiteColor),
-                            backgroundColor: Colors.red,
+                            backgroundColor: ColorPalettes.primaryColor,
                           ),
                         ],
                       ),
