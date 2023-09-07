@@ -3,6 +3,7 @@ import 'package:od/common/widgets/fields/textfield_components.dart';
 import 'package:od/features/auth/entities/user_model.dart';
 import 'package:od/features/chat_gpt/presentation/pages/chat_gpt_screen.dart';
 import 'package:od/features/course/presentation/widgets/details_course_screen.dart';
+import 'package:od/features/todo/presentation/pages/todo_screen.dart';
 
 import 'package:od/theme/color_palettes.dart';
 import 'package:od/theme/typhography.dart';
@@ -45,9 +46,15 @@ class CourseScreen extends StatelessWidget {
                     children: [
                       HeaderButtonComponents(
                         height: 40,
-                        icon: Icon(
-                          Icons.edit_note,
-                          color: Colors.orange,
+                        icon: InkWell(
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(TodoScreen.routeName);
+                          },
+                          child: Icon(
+                            Icons.edit_note,
+                            color: Colors.orange,
+                          ),
                         ),
                       ),
                       HeaderButtonComponents(
