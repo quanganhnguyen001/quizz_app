@@ -54,7 +54,7 @@ class DetailsCourseScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 16),
                   child: Text(
-                    'You can launch a new career in web develop-ment today by learning HTML & CSS. You don"t need a computer science degree or expensive software. All you need is a computer, a bit of time, a lot of determination, and a teacher you trust.',
+                    'You can launch a new career in mobile develop-ment today by learning Flutter. You don"t need a computer science degree or expensive software. All you need is a computer, a bit of time, a lot of determination, and a teacher you trust.',
                     style: AppTextStyle.paragraphMedium(),
                   ),
                 ),
