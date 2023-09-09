@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:od/features/question/presentation/pages/question_screen.dart';
+import 'package:od/features/home/presentation/pages/home_screen.dart';
 import 'package:od/gen/assets/assets.gen.dart';
-import 'package:od/theme/color_palettes.dart';
-import 'package:od/theme/typhography.dart';
 
 import '../../../../common/widgets/buttons/button_components.dart';
 import '../../../../common/widgets/buttons/header_buttons_components.dart';
+import '../../../../theme/color_palettes.dart';
+import '../../../../theme/typhography.dart';
 
-class DetailsCourseScreen extends StatelessWidget {
-  const DetailsCourseScreen({super.key});
+class ResultsWidget extends StatelessWidget {
+  const ResultsWidget({super.key, required this.score});
+  final int score;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class DetailsCourseScreen extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          'Flutter',
+          'Results',
           style: AppTextStyle.H4(color: ColorPalettes.darkColor),
         ),
       ),
@@ -35,32 +36,30 @@ class DetailsCourseScreen extends StatelessWidget {
         children: [
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
+                  height: 50,
+                ),
+                Assets.images.coolKidsXmasMorning.image(),
+                SizedBox(
                   height: 16,
                 ),
-                Assets.images.illustration3.image(),
-                SizedBox(
-                  height: 32,
+                Text(
+                  'Congratulations',
+                  style: AppTextStyle.H4(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16),
-                  child: Text(
-                    'About the course',
-                    style: AppTextStyle.H4(),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16),
-                  child: Text(
-                    'You can launch a new career in mobile develop-ment today by learning Flutter. You don"t need a computer science degree or expensive software. All you need is a computer, a bit of time, a lot of determination, and a teacher you trust.',
-                    style: AppTextStyle.paragraphMedium(),
-                  ),
+                Text(
+                  'Congratulations for complete \nall the answers!',
+                  style: AppTextStyle.paragraphMedium(),
+                  textAlign: TextAlign.center,
                 ),
                 SizedBox(
                   height: 16,
                 ),
+                Text(
+                  '${score}/50',
+                  style: AppTextStyle.H1(color: Colors.green),
+                )
               ],
             ),
           ),
@@ -69,11 +68,12 @@ class DetailsCourseScreen extends StatelessWidget {
             children: [
               ButtonComponents(
                 onPressed: () {
-                  Navigator.pushNamed(context, QuestionScreen.routeName);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      HomeScreen.routeName, (route) => false);
                 },
                 height: 56,
                 radius: 16,
-                title: 'Start',
+                title: 'Back to Home ',
                 textStyle:
                     AppTextStyle.buttonMedium(color: ColorPalettes.whiteColor),
                 backgroundColor: ColorPalettes.primaryColor,
