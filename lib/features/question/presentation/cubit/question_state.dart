@@ -1,13 +1,31 @@
 part of 'question_cubit.dart';
 
 class QuestionState extends Equatable {
-  QuestionState({required this.questionList});
-  List<QuestionsModel> questionList = [];
+  const QuestionState(
+      {this.questionList = const [],
+      this.selectedAnswerIndex = -1,
+      this.currentIndex = 0,
+      this.score = 0});
+  final List<QuestionsModel> questionList;
+  final int selectedAnswerIndex;
+  final int currentIndex;
+  final int score;
 
-  QuestionState copyWith({List<QuestionsModel>? questionList}) {
-    return QuestionState(questionList: questionList ?? this.questionList);
+  QuestionState copyWith({
+    List<QuestionsModel>? questionList,
+    int? selectedAnswerIndex,
+    int? currentIndex,
+    int? score,
+  }) {
+    return QuestionState(
+      questionList: questionList ?? this.questionList,
+      selectedAnswerIndex: selectedAnswerIndex ?? this.selectedAnswerIndex,
+      currentIndex: currentIndex ?? this.currentIndex,
+      score: score ?? this.score,
+    );
   }
 
   @override
-  List<Object> get props => [questionList];
+  List<Object> get props =>
+      [questionList, selectedAnswerIndex, score, currentIndex];
 }
