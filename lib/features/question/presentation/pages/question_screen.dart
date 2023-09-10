@@ -21,21 +21,6 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
-  final controller = PageController();
-
-  int? selectedAnswerIndex;
-  int currentIndex = 0;
-  int score = 0;
-
-  pickAnswer({required int value, required int correctOptionIndex}) {
-    setState(() {
-      selectedAnswerIndex = value;
-      if (selectedAnswerIndex == correctOptionIndex) {
-        score++;
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<QuestionCubit, QuestionState>(
@@ -64,11 +49,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
               Expanded(
                   child: PageView.builder(
                 onPageChanged: (value) {
-                  setState(() {
-                    currentIndex = value;
-                  });
+                  context.read<QuestionCubit>().changePage(value);
                 },
-                controller: controller,
+                controller: context.read<QuestionCubit>().controller,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: state.questionList.length,
                 itemBuilder: (context, index) {
@@ -117,19 +100,22 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                 child: OptionWidget(
                                   index: e.key,
                                   text: e.value.toString(),
-                                  press: selectedAnswerIndex == null
-                                      ? () => pickAnswer(
-                                          value: e.key,
-                                          correctOptionIndex: state
-                                                  .questionList[index]
-                                                  .correctOption ??
-                                              0)
+                                  press: state.selectedAnswerIndex < 0
+                                      ? () => context
+                                          .read<QuestionCubit>()
+                                          .pickAnswer(
+                                              value: e.key,
+                                              correctOptionIndex: state
+                                                      .questionList[index]
+                                                      .correctOption ??
+                                                  0)
                                       : null,
                                   correctAnswer:
                                       state.questionList[index].correctOption ??
                                           0,
-                                  isSelect: selectedAnswerIndex == e.key,
-                                  selectedAnswerIndex: selectedAnswerIndex,
+                                  isSelect: state.selectedAnswerIndex == e.key,
+                                  selectedAnswerIndex:
+                                      state.selectedAnswerIndex,
                                 ),
                               );
                             }).toList(),
@@ -145,22 +131,14 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 children: [
                   ButtonComponents(
                     onPressed: () {
-                      if (currentIndex == state.questionList.length - 1) {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ResultsWidget(
-                                  score: score,
-                                )));
-                      }
-                      controller.nextPage(
-                          duration: const Duration(milliseconds: 100),
-                          curve: Curves.bounceIn);
-                      setState(() {
-                        selectedAnswerIndex = null;
-                      });
+                      context.read<QuestionCubit>().nextQuestion(
+                          currentIndex: state.currentIndex,
+                          listlength: state.questionList.length,
+                          context: context);
                     },
                     height: 56,
                     radius: 16,
-                    title: currentIndex == state.questionList.length - 1
+                    title: state.currentIndex == state.questionList.length - 1
                         ? 'See Results'
                         : 'Next',
                     textStyle: AppTextStyle.buttonMedium(

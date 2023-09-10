@@ -1,14 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:od/common/widgets/buttons/small_buttons_components.dart';
 import 'package:od/common/widgets/buttons/social_buttons_components.dart';
 import 'package:od/common/widgets/fields/textfield_components.dart';
 import 'package:od/features/forgot_pass/presentation/pages/forgot_password_screen.dart';
-import 'package:od/features/home/presentation/pages/home_screen.dart';
 import 'package:od/features/login/presentation/cubit/login_cubit.dart';
 import 'package:od/features/register/presentation/pages/register_screen.dart';
-import 'package:od/features/settings/presentation/pages/settings_screen.dart';
 import 'package:od/gen/assets/assets.gen.dart';
 import 'package:od/gen/localization/l10n.dart';
 

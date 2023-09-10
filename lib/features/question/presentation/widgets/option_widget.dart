@@ -18,7 +18,7 @@ class OptionWidget extends StatelessWidget {
   final VoidCallback? press;
   final bool isSelect;
   final int correctAnswer;
-  final int? selectedAnswerIndex;
+  final int selectedAnswerIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class OptionWidget extends StatelessWidget {
           height: 58,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              border: selectedAnswerIndex != null
+              border: selectedAnswerIndex >= 0
                   ? Border.all(
                       width: isCorrectAnswer
                           ? 4
