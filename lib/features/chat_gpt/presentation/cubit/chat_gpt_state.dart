@@ -1,20 +1,29 @@
+// ignore_for_file: must_be_immutable
+
 part of 'chat_gpt_cubit.dart';
 
 class ChatGptState extends Equatable {
-  ChatGptState({
-    required this.isTyping,
-    required this.currentModel,
+  const ChatGptState({
+    this.isTyping = false,
+    this.currentModel = 'gpt-3.5-turbo',
+    this.chatList = const [],
   });
-  bool isTyping;
-  String currentModel;
+  final bool isTyping;
+  final String currentModel;
+  final List<ChatModel> chatList;
 
-  ChatGptState copyWith({bool? isTyping, String? currentModel}) {
+  ChatGptState copyWith({
+    bool? isTyping,
+    String? currentModel,
+    List<ChatModel>? chatList,
+  }) {
     return ChatGptState(
       isTyping: isTyping ?? this.isTyping,
       currentModel: currentModel ?? this.currentModel,
+      chatList: chatList ?? this.chatList,
     );
   }
 
   @override
-  List<Object> get props => [isTyping, currentModel];
+  List<Object> get props => [isTyping, currentModel, chatList];
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:od/features/chat_gpt/presentation/widgets/text_widget.dart';
@@ -30,7 +32,7 @@ class ChatWidget extends StatelessWidget {
                 chatIndex == 0
                     ? Assets.images.person.image(height: 30, width: 30)
                     : Assets.images.chatLogo.image(height: 30, width: 30),
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 ),
                 Expanded(
@@ -38,7 +40,7 @@ class ChatWidget extends StatelessWidget {
                         ? TextWidget(label: message)
                         : showAnimate
                             ? DefaultTextStyle(
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16),
@@ -54,7 +56,7 @@ class ChatWidget extends StatelessWidget {
                               )
                             : Text(
                                 message.trim(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16),

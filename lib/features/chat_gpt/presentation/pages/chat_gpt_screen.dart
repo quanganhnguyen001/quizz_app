@@ -1,21 +1,16 @@
-import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:od/features/chat_gpt/domain/entities/chatgpt_message_model.dart';
+
 import 'package:od/features/chat_gpt/presentation/cubit/chat_gpt_cubit.dart';
 
 import 'package:od/features/chat_gpt/presentation/widgets/chat_widget.dart';
-import 'package:od/features/chat_gpt/presentation/widgets/text_widget.dart';
+
 import 'package:od/gen/assets/assets.gen.dart';
-import 'package:od/repositories/chat_gpt_repo.dart';
+
 import 'package:od/theme/color_palettes.dart';
 import 'package:od/theme/typhography.dart';
 import 'package:od/widgets_catalog/screen/base_screen/base_screen.dart';
-
-import '../../../../gen/localization/l10n.dart';
 
 class ChatGptScreen extends StatefulWidget {
   const ChatGptScreen({super.key});
@@ -26,9 +21,6 @@ class ChatGptScreen extends StatefulWidget {
 }
 
 class _ChatGptScreenState extends State<ChatGptScreen> {
-  List<ChatModel> chatList = [];
-  bool isTyping = false;
-  final listScrollController = ScrollController();
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -46,7 +38,7 @@ class _ChatGptScreenState extends State<ChatGptScreen> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_ios,
                   color: Colors.white,
                 ),
@@ -54,7 +46,7 @@ class _ChatGptScreenState extends State<ChatGptScreen> {
               title: Row(
                 children: [
                   Assets.images.openaiLogo.image(height: 40, width: 40),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Text(
@@ -71,23 +63,24 @@ class _ChatGptScreenState extends State<ChatGptScreen> {
                 children: [
                   Flexible(
                     child: ListView.builder(
-                        controller: listScrollController,
-                        itemCount: chatList.length,
+                        controller:
+                            context.read<ChatGptCubit>().listScrollController,
+                        itemCount: state.chatList.length,
                         itemBuilder: (context, index) {
                           return ChatWidget(
-                            message: chatList[index].message,
-                            chatIndex: chatList[index].chatIndex,
-                            showAnimate: chatList.length - 1 == index,
+                            message: state.chatList[index].message,
+                            chatIndex: state.chatList[index].chatIndex,
+                            showAnimate: state.chatList.length - 1 == index,
                           );
                         }),
                   ),
-                  isTyping
-                      ? SpinKitThreeBounce(
+                  state.isTyping
+                      ? const SpinKitThreeBounce(
                           color: Colors.white,
                           size: 18,
                         )
                       : Container(),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Container(
@@ -106,10 +99,12 @@ class _ChatGptScreenState extends State<ChatGptScreen> {
                             },
                             onFieldSubmitted: (value) async {
                               if (formKey.currentState!.validate()) {
-                                sendMessageFCT();
+                                context
+                                    .read<ChatGptCubit>()
+                                    .sendMessageFCT(context: context);
                               }
                             },
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                             controller:
                                 context.read<ChatGptCubit>().chatController,
                             decoration: InputDecoration(
@@ -121,10 +116,12 @@ class _ChatGptScreenState extends State<ChatGptScreen> {
                           IconButton(
                               onPressed: () async {
                                 if (formKey.currentState!.validate()) {
-                                  sendMessageFCT();
+                                  context
+                                      .read<ChatGptCubit>()
+                                      .sendMessageFCT(context: context);
                                 }
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.send,
                                 color: Colors.white,
                               ))
@@ -139,68 +136,5 @@ class _ChatGptScreenState extends State<ChatGptScreen> {
         },
       );
     });
-  }
-
-  scrollListToEnd() {
-    listScrollController.animateTo(
-        listScrollController.position.maxScrollExtent,
-        duration: Duration(seconds: 2),
-        curve: Curves.easeOut);
-  }
-
-  Future sendMessageFCT() async {
-    if (isTyping) {
-      showDialog(
-          context: context,
-          builder: (context) {
-            Future.delayed((const Duration(seconds: 2)), () {
-              Navigator.of(context).pop();
-            });
-            return AlertDialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              title: Assets.images.alertPassword.image(height: 56),
-              content: Text(
-                'You cant send multiple message at a time',
-                textAlign: TextAlign.center,
-                style: AppTextStyle.H4(color: Colors.red),
-              ),
-            );
-          });
-      return;
-    }
-    try {
-      String message = context.read<ChatGptCubit>().chatController.text;
-      setState(() {
-        isTyping = true;
-        chatList.add(ChatModel(message: message, chatIndex: 0));
-        context.read<ChatGptCubit>().chatController.clear();
-      });
-      chatList.addAll(await ChatGptRepo().sendMessage(message: message));
-      setState(() {});
-    } catch (e) {
-      showDialog(
-          context: context,
-          builder: (context) {
-            Future.delayed((const Duration(seconds: 2)), () {
-              Navigator.of(context).pop();
-            });
-            return AlertDialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              title: Assets.images.alertPassword.image(height: 56),
-              content: Text(
-                'Some error occured pls try again',
-                textAlign: TextAlign.center,
-                style: AppTextStyle.H4(color: Colors.red),
-              ),
-            );
-          });
-    } finally {
-      setState(() {
-        scrollListToEnd();
-        isTyping = false;
-      });
-    }
   }
 }
