@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:od/features/question/domain/entities/questions_model.dart';
+
 import 'package:od/features/question/presentation/cubit/question_cubit.dart';
-import 'package:od/features/question/presentation/widgets/results_widget.dart';
+
 import 'package:od/gen/assets/assets.gen.dart';
-import 'package:od/repositories/question_repo.dart';
 
 import '../../../../common/widgets/buttons/button_components.dart';
 import '../../../../common/widgets/buttons/header_buttons_components.dart';
@@ -28,14 +27,14 @@ class _QuestionScreenState extends State<QuestionScreen> {
         return Scaffold(
           appBar: AppBar(
             leading: Padding(
-              padding: EdgeInsets.only(left: 16),
+              padding: const EdgeInsets.only(left: 16),
               child: HeaderButtonComponents(
-                padding: EdgeInsets.only(left: 5),
+                padding: const EdgeInsets.only(left: 5),
                 icon: IconButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    icon: Icon(Icons.arrow_back_ios)),
+                    icon: const Icon(Icons.arrow_back_ios)),
               ),
             ),
             centerTitle: true,
@@ -52,7 +51,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   context.read<QuestionCubit>().changePage(value);
                 },
                 controller: context.read<QuestionCubit>().controller,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: state.questionList.length,
                 itemBuilder: (context, index) {
                   return Column(
@@ -72,7 +71,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                           style: AppTextStyle.H4(),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       Padding(
@@ -85,7 +84,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                 color: ColorPalettes.lightGrayColor,
                                 child: Assets.images.idea.image())),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       Expanded(

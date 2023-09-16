@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,7 +14,7 @@ part 'forgot_pass_state.dart';
 
 class ForgotPassCubit extends Cubit<ForgotPassState> {
   final emailController = TextEditingController();
-  ForgotPassCubit() : super(ForgotPassState());
+  ForgotPassCubit() : super(const ForgotPassState());
 
   Future resetPassword({required BuildContext ctx}) async {
     EasyLoading.show();
@@ -33,7 +35,7 @@ class ForgotPassCubit extends Cubit<ForgotPassState> {
                           Navigator.of(context).pushNamedAndRemoveUntil(
                               LoginScreen.routeName, (route) => false);
                         },
-                        child: Text(
+                        child: const Text(
                           'OK',
                           style: TextStyle(color: Colors.white),
                         )),

@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ import '../widgets/results_widget.dart';
 part 'question_state.dart';
 
 class QuestionCubit extends Cubit<QuestionState> {
-  QuestionCubit() : super(QuestionState(questionList: []));
+  QuestionCubit() : super(const QuestionState(questionList: []));
   final controller = PageController();
 
   Future<List<QuestionsModel>?> getAllQuestion() async {

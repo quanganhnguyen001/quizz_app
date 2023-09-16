@@ -1,9 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:od/features/auth/cubit/auth_cubit.dart';
-import 'package:od/features/login/presentation/pages/login_screen.dart';
 
 import 'package:od/gen/assets/assets.gen.dart';
 import 'package:od/gen/localization/l10n.dart';

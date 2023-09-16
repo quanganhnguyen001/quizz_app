@@ -1,20 +1,17 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:od/common/widgets/buttons/header_buttons_components.dart';
-import 'package:od/features/settings/presentation/cubit/setting_cubit.dart';
+
 import 'package:od/features/update_profile/presentation/cubit/update_profile_cubit.dart';
 import 'package:od/gen/localization/l10n.dart';
 import 'package:od/theme/typhography.dart';
 
 import '../../../../common/widgets/buttons/button_components.dart';
 import '../../../../common/widgets/fields/textfield_components.dart';
-import '../../../../gen/assets/assets.gen.dart';
+
 import '../../../../theme/color_palettes.dart';
 import '../widgets/update_profile_arg.dart';
 
@@ -45,14 +42,14 @@ class _UpdateProfileState extends State<UpdateProfile> {
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
-          padding: EdgeInsets.only(left: 16),
+          padding: const EdgeInsets.only(left: 16),
           child: HeaderButtonComponents(
-            padding: EdgeInsets.only(left: 5),
+            padding: const EdgeInsets.only(left: 5),
             icon: IconButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(Icons.arrow_back_ios)),
+                icon: const Icon(Icons.arrow_back_ios)),
           ),
         ),
         title: Text(
@@ -71,7 +68,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 32,
                         ),
                         InkWell(
@@ -119,7 +116,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                             '',
                                       )),
                                     ))),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         Padding(
@@ -141,7 +138,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                 color: ColorPalettes.darkgrayColor),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         Padding(
@@ -202,7 +199,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
     return showModalBottomSheet(
         context: context,
         builder: (ctx) {
-          return Container(
+          return SizedBox(
               height: 150,
               child: Padding(
                 padding:
@@ -212,39 +209,39 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     onTap: ontap1,
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.camera,
                           size: 40,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 16,
                         ),
                         Text(
                           Str.of(context).from_camera,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   InkWell(
                     onTap: ontap2,
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.image,
                           size: 40,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 16,
                         ),
                         Text(
                           Str.of(context).from_gallery,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                           ),
                         )

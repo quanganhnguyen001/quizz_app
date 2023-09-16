@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
@@ -54,6 +56,5 @@ class UserModel extends Equatable {
       UserModel.fromMap(json.decode(source));
 
   @override
-  // TODO: implement props
   List<Object?> get props => [uid, name, imageUrl, phone, email];
 }

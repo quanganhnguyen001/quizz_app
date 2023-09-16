@@ -4,9 +4,9 @@ import 'package:od/common/cubit/cubit/user_cubit.dart';
 import 'package:od/features/auth/entities/user_model.dart';
 import 'package:od/features/course/presentation/pages/course_screen.dart';
 import 'package:od/features/home/presentation/cubit/home_cubit.dart';
-import 'package:od/features/profile/presentation/cubit/profile_cubit.dart';
+
 import 'package:od/features/profile/presentation/pages/profile_screen.dart';
-import 'package:od/features/settings/presentation/cubit/setting_cubit.dart';
+
 import 'package:od/features/settings/presentation/pages/settings_screen.dart';
 import 'package:od/theme/color_palettes.dart';
 import 'package:od/theme/typhography.dart';
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
               CourseScreen(
                 user: userState.user ?? UserModel(),
               ),
-              ProfileScreen(),
+              const ProfileScreen(),
               SettingsScreen(
                 user: userState.user ?? UserModel(),
               ),
@@ -47,12 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: BoxDecoration(
                     border:
                         Border.all(width: 1, color: ColorPalettes.grayColor),
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16),
                     )),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16),
                   ),

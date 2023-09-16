@@ -1,17 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:od/app/app_theme/app_theme_cubit.dart';
+
 import 'package:od/features/auth/cubit/auth_cubit.dart';
 import 'package:od/features/home/presentation/pages/home_screen.dart';
 import 'package:od/features/login/presentation/pages/login_screen.dart';
 
-import 'package:od/widgets_catalog/dev_button/dev_button.dart';
-
 class BaseScreen extends StatefulWidget {
-  /// scaffold: (ctx) => Scaffold(
-  ///           backgroundColor: colorOf(ctx).primaryColor);
   final Widget Function(BuildContext ctx) scaffold;
   const BaseScreen({
     Key? key,

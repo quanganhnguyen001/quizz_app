@@ -14,7 +14,7 @@ import '../../../../theme/color_palettes.dart';
 import '../../../../theme/typhography.dart';
 
 class EditTodo extends StatefulWidget {
-  EditTodo({
+  const EditTodo({
     Key? key,
     required this.arg,
   }) : super(key: key);

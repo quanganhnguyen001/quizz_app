@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
@@ -19,7 +18,7 @@ import '../../../../theme/typhography.dart';
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
-  RegisterCubit() : super(RegisterState(isShowPassword: true));
+  RegisterCubit() : super(const RegisterState(isShowPassword: true));
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final nameController = TextEditingController();
