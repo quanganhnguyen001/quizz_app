@@ -16,14 +16,14 @@ class ResultsWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
-          padding: EdgeInsets.only(left: 16),
+          padding: const EdgeInsets.only(left: 16),
           child: HeaderButtonComponents(
-            padding: EdgeInsets.only(left: 5),
+            padding: const EdgeInsets.only(left: 5),
             icon: IconButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(Icons.arrow_back_ios)),
+                icon: const Icon(Icons.arrow_back_ios)),
           ),
         ),
         centerTitle: true,
@@ -37,11 +37,11 @@ class ResultsWidget extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
                 Assets.images.coolKidsXmasMorning.image(),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Text(
@@ -53,11 +53,11 @@ class ResultsWidget extends StatelessWidget {
                   style: AppTextStyle.paragraphMedium(),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Text(
-                  '${score}/50',
+                  '$score/50',
                   style: AppTextStyle.H1(color: Colors.green),
                 )
               ],

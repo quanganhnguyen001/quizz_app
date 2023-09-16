@@ -1,19 +1,16 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:od/features/forgot_pass/presentation/cubit/forgot_pass_cubit.dart';
 
 import '../../../../common/widgets/buttons/button_components.dart';
 import '../../../../common/widgets/buttons/header_buttons_components.dart';
-import '../../../../common/widgets/buttons/small_buttons_components.dart';
+
 import '../../../../common/widgets/fields/textfield_components.dart';
 import '../../../../gen/assets/assets.gen.dart';
 import '../../../../gen/localization/l10n.dart';
 import '../../../../theme/color_palettes.dart';
 import '../../../../theme/typhography.dart';
 import '../../../../widgets_catalog/screen/base_screen/base_screen.dart';
-import '../../../login/presentation/pages/login_screen.dart';
-import '../../../register/presentation/cubit/register_cubit.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -79,7 +76,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               AppTextStyle.paragraphMedium(color: Colors.red),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       Padding(
@@ -102,7 +99,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               color: ColorPalettes.darkgrayColor),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       Column(

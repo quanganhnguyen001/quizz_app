@@ -1,24 +1,20 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:od/features/settings/presentation/cubit/setting_cubit.dart';
+
 import 'package:od/features/settings/presentation/widgets/menu_item.dart';
 import 'package:od/features/update_profile/presentation/widgets/update_profile_arg.dart';
 import 'package:od/features/update_profile/presentation/pages/update_profile_widget.dart';
 import 'package:od/gen/localization/l10n.dart';
 
-import 'package:od/theme/color_palettes.dart';
-
 import '../../../../app/app_language/app_language_cubit.dart';
 import '../../../../app/app_theme/app_theme_cubit.dart';
-import '../../../../common/widgets/buttons/header_buttons_components.dart';
+
 import '../../../../gen/assets/assets.gen.dart';
 import '../../../../theme/app_theme.dart';
 import '../../../../theme/typhography.dart';
 import '../../../auth/entities/user_model.dart';
-import '../../../profile/presentation/widgets/cell_widget.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key, required this.user});
@@ -52,7 +48,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             MenuItem(
               title: Str.of(context).change_language,
-              icon: Icon(Icons.language),
+              icon: const Icon(Icons.language),
               change: BlocBuilder<AppLanguageCubit, AppLanguageState>(
                 builder: (context, state) {
                   return AnimatedToggleSwitch<Locale>.rolling(
@@ -76,12 +72,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             MenuItem(
               title: Str.of(context).change_theme,
-              icon: Icon(Icons.dark_mode),
+              icon: const Icon(Icons.dark_mode),
               change: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: BlocBuilder<AppThemeCubit, AppThemeState>(
@@ -106,7 +102,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             InkWell(
@@ -119,8 +115,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               },
               child: MenuItem(
                 title: Str.of(context).update_info,
-                icon: Icon(Icons.person),
-                change: Icon(Icons.arrow_forward_ios),
+                icon: const Icon(Icons.person),
+                change: const Icon(Icons.arrow_forward_ios),
               ),
             )
           ],

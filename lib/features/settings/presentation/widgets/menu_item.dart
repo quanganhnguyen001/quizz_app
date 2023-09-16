@@ -33,7 +33,7 @@ class MenuItem extends StatelessWidget {
                   child: Row(
                     children: [
                       icon,
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(

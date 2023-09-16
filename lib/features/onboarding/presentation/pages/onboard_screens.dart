@@ -4,7 +4,7 @@ import 'package:od/app/app_theme/app_theme_listener.dart';
 
 import 'package:od/features/login/presentation/pages/login_screen.dart';
 import 'package:od/theme/typhography.dart';
-import 'package:od/widgets_catalog/screen/base_screen/base_screen.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../gen/localization/l10n.dart';

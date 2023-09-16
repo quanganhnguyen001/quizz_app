@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -16,7 +18,7 @@ import '../../../../theme/typhography.dart';
 part 'update_profile_state.dart';
 
 class UpdateProfileCubit extends Cubit<UpdateProfileState> {
-  UpdateProfileCubit() : super(UpdateProfileState(selectedImage: ''));
+  UpdateProfileCubit() : super(const UpdateProfileState(selectedImage: ''));
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   XFile? file;
@@ -35,7 +37,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
       final ref = FirebaseStorage.instance
           .ref()
           .child('userImage')
-          .child('/' + FirebaseAuth.instance.currentUser!.uid);
+          .child('/${FirebaseAuth.instance.currentUser!.uid}');
       if (file != null) {
         await ref.putFile(File(file?.path ?? ''));
       }

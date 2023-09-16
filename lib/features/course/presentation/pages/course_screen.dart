@@ -38,7 +38,7 @@ class CourseScreen extends StatelessWidget {
                       Text(
                         user.name ?? '',
                         style: AppTextStyle.H3(
-                            color: Color.fromRGBO(51, 51, 51, 1)),
+                            color: const Color.fromRGBO(51, 51, 51, 1)),
                       )
                     ],
                   ),
@@ -51,7 +51,7 @@ class CourseScreen extends StatelessWidget {
                             Navigator.of(context)
                                 .pushNamed(TodoScreen.routeName);
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.edit_note,
                             color: Colors.orange,
                           ),
@@ -71,7 +71,7 @@ class CourseScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             Padding(
@@ -83,11 +83,11 @@ class CourseScreen extends StatelessWidget {
                     color: ColorPalettes.darkgrayColor),
                 rightIcon: IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.search),
+                  icon: const Icon(Icons.search),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Padding(
@@ -102,7 +102,7 @@ class CourseScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(8),
                           topRight: Radius.circular(8)),
                       child: Container(
@@ -110,7 +110,7 @@ class CourseScreen extends StatelessWidget {
                           color: ColorPalettes.lightGrayColor,
                           child: Assets.images.flutterIcon.image()),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     Row(
@@ -142,7 +142,7 @@ class CourseScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 16,
                         ),
                         Padding(
@@ -153,9 +153,9 @@ class CourseScreen extends StatelessWidget {
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) =>
-                                        DetailsCourseScreen()));
+                                        const DetailsCourseScreen()));
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.play_arrow,
                                 color: Colors.green,
                               ),

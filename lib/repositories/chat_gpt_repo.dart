@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -9,27 +7,6 @@ import '../api_key.dart';
 
 class ChatGptRepo {
   final dio = Dio();
-  // Future<List<ModelAI>> getModel() async {
-  //   try {
-  //     final response = await dio.get('https://api.openai.com/v1/models',
-  //         options: Options(headers: {
-  //           'Authorization': 'Bearer $API_KEY',
-  //         }));
-  //     Map json = response.data;
-  //     List temp = [];
-  //     for (var e in json['data']) {
-  //       temp.add(e);
-  //     }
-  //     if (json['error'] != null) {
-  //       throw HttpException(json['error']['message']);
-  //     }
-
-  //     return ModelAI.modelFromJson(temp);
-  //   } catch (e) {
-  //     print(e);
-  //     throw e.toString();
-  //   }
-  // }
 
   Future<List<ChatModel>> sendMessage({required String message}) async {
     try {

@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
@@ -7,7 +9,7 @@ import 'package:od/features/auth/entities/user_model.dart';
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
-  UserCubit() : super(UserState(null));
+  UserCubit() : super(const UserState(null));
 
   Future<void> loadUserData() async {
     final user = await _loadUserData();

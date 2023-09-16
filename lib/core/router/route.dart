@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,14 +11,13 @@ import 'package:od/features/home/presentation/cubit/home_cubit.dart';
 import 'package:od/features/home/presentation/pages/home_screen.dart';
 import 'package:od/features/login/presentation/cubit/login_cubit.dart';
 
-import 'package:od/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:od/features/onboarding/presentation/pages/onboard_screens.dart';
-import 'package:od/features/profile/presentation/pages/profile_screen.dart';
+
 import 'package:od/features/question/presentation/cubit/question_cubit.dart';
 import 'package:od/features/question/presentation/pages/question_screen.dart';
 import 'package:od/features/register/presentation/cubit/register_cubit.dart';
 import 'package:od/features/register/presentation/pages/register_screen.dart';
-import 'package:od/features/settings/presentation/pages/settings_screen.dart';
+
 import 'package:od/features/todo/presentation/pages/add_todo_screen.dart';
 import 'package:od/features/todo/presentation/pages/edit_todo_arguments.dart';
 import 'package:od/features/todo/presentation/pages/edit_todo_screen.dart';
@@ -43,7 +41,7 @@ class OnGenerateRoute {
     if (settings.name == OnboardScreens.routeName) {
       return MaterialPageRoute(
         settings: const RouteSettings(name: OnboardScreens.routeName),
-        builder: (_) => OnboardScreens(),
+        builder: (_) => const OnboardScreens(),
       );
     }
     if (settings.name == UpdateProfile.routeName) {
@@ -60,7 +58,7 @@ class OnGenerateRoute {
         settings: const RouteSettings(name: RegisterScreen.routeName),
         builder: (_) => BlocProvider<RegisterCubit>(
           create: (context) => RegisterCubit(),
-          child: RegisterScreen(),
+          child: const RegisterScreen(),
         ),
       );
     }
@@ -69,7 +67,7 @@ class OnGenerateRoute {
         settings: const RouteSettings(name: QuestionScreen.routeName),
         builder: (_) => BlocProvider(
           create: (context) => QuestionCubit()..getAllQuestion(),
-          child: QuestionScreen(),
+          child: const QuestionScreen(),
         ),
       );
     }
@@ -86,7 +84,7 @@ class OnGenerateRoute {
         settings: const RouteSettings(name: LoginScreen.routeName),
         builder: (_) => BlocProvider<LoginCubit>(
           create: (context) => LoginCubit(),
-          child: LoginScreen(),
+          child: const LoginScreen(),
         ),
       );
     }
@@ -95,7 +93,7 @@ class OnGenerateRoute {
         settings: const RouteSettings(name: ChatGptScreen.routeName),
         builder: (_) => BlocProvider(
           create: (context) => ChatGptCubit(),
-          child: ChatGptScreen(),
+          child: const ChatGptScreen(),
         ),
       );
     }
@@ -118,7 +116,7 @@ class OnGenerateRoute {
         settings: const RouteSettings(name: ForgotPasswordScreen.routeName),
         builder: (_) => BlocProvider(
           create: (context) => ForgotPassCubit(),
-          child: ForgotPasswordScreen(),
+          child: const ForgotPasswordScreen(),
         ),
       );
     }
@@ -136,7 +134,7 @@ class OnGenerateRoute {
         settings: const RouteSettings(name: HomeScreen.routeName),
         builder: (_) => BlocProvider<HomeCubit>(
           create: (context) => HomeCubit(),
-          child: HomeScreen(),
+          child: const HomeScreen(),
         ),
       );
     }

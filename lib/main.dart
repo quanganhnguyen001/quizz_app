@@ -7,14 +7,16 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:od/firebase_options.dart';
 import 'package:path_provider/path_provider.dart';
 import 'app/app.dart';
+import 'app/app_observer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Bloc.observer = AppObersever();
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
         ? HydratedStorage.webStorageDirectory
         : await getTemporaryDirectory(),
   );
-  runApp(YinApp());
+  runApp(const YinApp());
 }

@@ -1,21 +1,15 @@
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'package:od/common/cubit/cubit/user_cubit.dart';
-import 'package:od/common/widgets/buttons/header_buttons_components.dart';
+
 import 'package:od/features/auth/cubit/auth_cubit.dart';
-import 'package:od/features/profile/presentation/cubit/profile_cubit.dart';
-import 'package:od/gen/assets/assets.gen.dart';
+
 import 'package:od/theme/color_palettes.dart';
 import 'package:od/theme/typhography.dart';
 
 import '../../../../gen/localization/l10n.dart';
-import '../../../auth/entities/user_model.dart';
+
 import '../widgets/cell_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
