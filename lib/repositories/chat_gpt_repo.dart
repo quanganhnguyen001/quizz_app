@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:od/features/chat_gpt/domain/entities/chatgpt_message_model.dart';
 
 import '../api_key.dart';
+import '../features/chat_gpt/models/chatgpt_message_model.dart';
 
 class ChatGptRepo {
   final dio = Dio();
