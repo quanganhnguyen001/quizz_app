@@ -18,15 +18,17 @@ import 'package:od/features/question/presentation/pages/question_screen.dart';
 import 'package:od/features/register/presentation/cubit/register_cubit.dart';
 import 'package:od/features/register/presentation/pages/register_screen.dart';
 
-import 'package:od/features/todo/presentation/pages/add_todo_screen.dart';
+import 'package:od/features/todo/presentation/widgets/add_todo_widget.dart';
 import 'package:od/features/todo/presentation/pages/edit_todo_arguments.dart';
-import 'package:od/features/todo/presentation/pages/edit_todo_screen.dart';
+import 'package:od/features/todo/presentation/widgets/edit_todo_widget.dart';
 import 'package:od/features/update_profile/presentation/cubit/update_profile_cubit.dart';
 import 'package:od/features/update_profile/presentation/widgets/update_profile_arg.dart';
 import 'package:od/features/update_profile/presentation/pages/update_profile_widget.dart';
 
 import '../../features/login/presentation/pages/login_screen.dart';
 import '../../features/splash/presentation/pages/splash_screen.dart';
+
+import '../../features/todo/presentation/cubit/todo_cubit.dart';
 import '../../features/todo/presentation/pages/todo_screen.dart';
 import '../../widgets_catalog/ui_testing.dart';
 
@@ -100,14 +102,19 @@ class OnGenerateRoute {
     if (settings.name == TodoScreen.routeName) {
       return MaterialPageRoute(
         settings: const RouteSettings(name: TodoScreen.routeName),
-        builder: (_) => const TodoScreen(),
+        builder: (_) => BlocProvider(
+          create: (context) => TodoCubit(),
+          child: const TodoScreen(),
+        ),
       );
     }
     if (settings.name == AddTodo.routeName) {
       final argument = settings.arguments as dynamic;
       return MaterialPageRoute(
         settings: const RouteSettings(name: AddTodo.routeName),
-        builder: (_) => AddTodo(listTodo: argument),
+        builder: (_) => AddTodo(
+          onAddTodo: argument,
+        ),
       );
     }
 
@@ -125,7 +132,10 @@ class OnGenerateRoute {
       return MaterialPageRoute<EditTodoArg>(
           settings: const RouteSettings(name: EditTodo.routeName),
           builder: (_) {
-            return EditTodo(arg: arg);
+            return BlocProvider(
+              create: (context) => TodoCubit(),
+              child: EditTodo(arg: arg),
+            );
           });
     }
 

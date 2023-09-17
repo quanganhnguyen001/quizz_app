@@ -1,10 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+
 import 'package:od/common/widgets/buttons/button_components.dart';
 import 'package:od/common/widgets/fields/textfield_components.dart';
+
 import 'package:od/features/todo/presentation/pages/todo_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:uuid/uuid.dart';
 
@@ -14,27 +13,53 @@ import '../../../../theme/typhography.dart';
 class AddTodo extends StatefulWidget {
   const AddTodo({
     Key? key,
-    required this.listTodo,
+    required this.onAddTodo,
   }) : super(key: key);
   static const String routeName = '/AddTodo';
-  final List<TodoModel> listTodo;
+
+  final void Function(TodoModel todoModel) onAddTodo;
 
   @override
   State<AddTodo> createState() => _AddTodoState();
 }
 
 class _AddTodoState extends State<AddTodo> {
+  TimeOfDay startTime = TimeOfDay.now();
+  TimeOfDay endTime = TimeOfDay.now();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   var uid = const Uuid();
-  TimeOfDay startTime = TimeOfDay.now();
-  TimeOfDay endTime = TimeOfDay.now();
+  late TodoModel todoModel;
+  @override
+  void initState() {
+    titleController.addListener(() {
+      setState(() {
+        todoModel.title = titleController.text;
+      });
+    });
+    descriptionController.addListener(() {
+      setState(() {
+        todoModel.description = descriptionController.text;
+      });
+    });
+    todoModel = TodoModel(
+        uid: uid.v4(),
+        title: '',
+        description: '',
+        startTime: TimeOfDay.now().toString(),
+        endTime: TimeOfDay.now().toString(),
+        isDone: 'false');
+
+    super.initState();
+  }
+
   selectStartTime(BuildContext context) async {
     final TimeOfDay? pickedStartTime =
         await showTimePicker(context: context, initialTime: startTime);
     if (pickedStartTime != null && pickedStartTime != startTime) {
       setState(() {
         startTime = pickedStartTime;
+        todoModel.startTime = startTime.toString();
       });
     }
   }
@@ -45,29 +70,9 @@ class _AddTodoState extends State<AddTodo> {
     if (pickedEndTime != null && pickedEndTime != endTime) {
       setState(() {
         endTime = pickedEndTime;
+        todoModel.endTime = endTime.toString();
       });
     }
-  }
-
-  addTodo(TodoModel todoModel) {
-    widget.listTodo.add(TodoModel(
-      uid: todoModel.uid,
-      title: todoModel.title,
-      description: todoModel.description,
-      startTime: todoModel.startTime,
-      endTime: todoModel.endTime,
-      isDone: 'false',
-    ));
-    final listTodoSave = widget.listTodo;
-    setData(listTodoSave);
-  }
-
-  setData(List<TodoModel> todo) async {
-    final List<Map<String, dynamic>> listTodoMap =
-        todo.map((e) => e.toMap()).toList();
-    final json = jsonEncode(listTodoMap);
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('isSave', json);
   }
 
   @override
@@ -131,13 +136,8 @@ class _AddTodoState extends State<AddTodo> {
             children: [
               ButtonComponents(
                 onPressed: () {
-                  addTodo(TodoModel(
-                      uid: uid.v4(),
-                      title: titleController.text,
-                      description: descriptionController.text,
-                      startTime: startTime.toString(),
-                      endTime: endTime.toString(),
-                      isDone: 'false'));
+                  widget.onAddTodo.call(todoModel);
+
                   Navigator.of(context).pop();
                 },
                 backgroundColor: Colors.red,
