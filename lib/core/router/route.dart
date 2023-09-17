@@ -1,36 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:od/features/chat_gpt/presentation/cubit/chat_gpt_cubit.dart';
-import 'package:od/features/chat_gpt/presentation/pages/chat_gpt_screen.dart';
+import '../../common/widgets/buttons/switch_button.dart';
+import '../../features/chat_gpt/cubit/chat_gpt_cubit.dart';
+import '../../features/chat_gpt/views/pages/chat_gpt_screen.dart';
+import '../../features/forgot_pass/cubit/forgot_pass_cubit.dart';
+import '../../features/forgot_pass/views/pages/forgot_password_screen.dart';
+import '../../features/home/cubit/home_cubit.dart';
+import '../../features/home/views/pages/home_screen.dart';
 
-import 'package:od/features/forgot_pass/presentation/cubit/forgot_pass_cubit.dart';
-import 'package:od/features/forgot_pass/presentation/pages/forgot_password_screen.dart';
+import '../../features/login/cubit/login_cubit.dart';
+import '../../features/login/views/pages/login_screen.dart';
+import '../../features/onboarding/views/pages/onboard_screens.dart';
+import '../../features/question/cubit/question_cubit.dart';
+import '../../features/question/pages/question_screen.dart';
+import '../../features/register/cubit/register_cubit.dart';
+import '../../features/register/views/pages/register_screen.dart';
 
-import 'package:od/features/home/presentation/cubit/home_cubit.dart';
-import 'package:od/features/home/presentation/pages/home_screen.dart';
-import 'package:od/features/login/presentation/cubit/login_cubit.dart';
+import '../../features/splash/views/pages/splash_screen.dart';
 
-import 'package:od/features/onboarding/presentation/pages/onboard_screens.dart';
-
-import 'package:od/features/question/presentation/cubit/question_cubit.dart';
-import 'package:od/features/question/presentation/pages/question_screen.dart';
-import 'package:od/features/register/presentation/cubit/register_cubit.dart';
-import 'package:od/features/register/presentation/pages/register_screen.dart';
-
-import 'package:od/features/todo/presentation/widgets/add_todo_widget.dart';
-import 'package:od/features/todo/presentation/pages/edit_todo_arguments.dart';
-import 'package:od/features/todo/presentation/widgets/edit_todo_widget.dart';
-import 'package:od/features/update_profile/presentation/cubit/update_profile_cubit.dart';
-import 'package:od/features/update_profile/presentation/widgets/update_profile_arg.dart';
-import 'package:od/features/update_profile/presentation/pages/update_profile_widget.dart';
-
-import '../../features/login/presentation/pages/login_screen.dart';
-import '../../features/splash/presentation/pages/splash_screen.dart';
-
-import '../../features/todo/presentation/cubit/todo_cubit.dart';
-import '../../features/todo/presentation/pages/todo_screen.dart';
-import '../../widgets_catalog/ui_testing.dart';
+import '../../features/todo/cubit/todo_cubit.dart';
+import '../../features/todo/models/edit_todo_arguments.dart';
+import '../../features/todo/views/pages/todo_screen.dart';
+import '../../features/todo/views/widgets/add_todo_widget.dart';
+import '../../features/todo/views/widgets/edit_todo_widget.dart';
+import '../../features/update_profile/cubit/update_profile_cubit.dart';
+import '../../features/update_profile/models/update_profile_arg.dart';
+import '../../features/update_profile/views/pages/update_profile_widget.dart';
 
 class OnGenerateRoute {
   static Route<dynamic>? route(RouteSettings settings) {
