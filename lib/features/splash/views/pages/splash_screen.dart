@@ -11,7 +11,7 @@ import 'package:od/gen/localization/l10n.dart';
 import 'package:od/theme/typhography.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../base_screen.dart';
+import '../../../auth/base_screen.dart';
 import '../../../onboarding/views/pages/onboard_screens.dart';
 
 class SplashScreen extends StatefulWidget {

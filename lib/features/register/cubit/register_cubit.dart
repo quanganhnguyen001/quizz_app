@@ -10,7 +10,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:od/features/auth/cubit/auth_cubit.dart';
 import 'package:od/features/auth/entities/user_model.dart';
 import 'package:od/gen/localization/l10n.dart';
-import 'package:od/repositories/auth_repo.dart';
+import 'package:od/features/repositories/auth_repo.dart';
 
 import '../../../../gen/assets/assets.gen.dart';
 import '../../../../theme/typhography.dart';

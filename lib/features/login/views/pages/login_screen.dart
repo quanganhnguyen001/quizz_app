@@ -11,7 +11,7 @@ import 'package:od/theme/color_palettes.dart';
 import 'package:od/theme/typhography.dart';
 
 import '../../../../../common/widgets/buttons/button_components.dart';
-import '../../../../base_screen.dart';
+import '../../../auth/base_screen.dart';
 import '../../../forgot_pass/views/pages/forgot_password_screen.dart';
 import '../../../register/views/pages/register_screen.dart';
 import '../../cubit/login_cubit.dart';

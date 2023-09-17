@@ -7,7 +7,7 @@ import 'package:od/gen/assets/assets.gen.dart';
 import 'package:od/theme/color_palettes.dart';
 import 'package:od/theme/typhography.dart';
 
-import '../../../../base_screen.dart';
+import '../../../auth/base_screen.dart';
 import '../../cubit/chat_gpt_cubit.dart';
 import '../widgets/chat_widget.dart';
 
