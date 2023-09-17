@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:od/features/auth/cubit/auth_cubit.dart';
 
-import 'package:od/repositories/auth_repo.dart';
+import 'package:od/features/repositories/auth_repo.dart';
 
 import '../../../../gen/assets/assets.gen.dart';
 import '../../../../theme/typhography.dart';

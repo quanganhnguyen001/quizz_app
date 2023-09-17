@@ -6,7 +6,7 @@ import 'package:od/features/auth/entities/user_model.dart';
 import 'package:od/theme/color_palettes.dart';
 import 'package:od/theme/typhography.dart';
 
-import '../../../../base_screen.dart';
+import '../../../auth/base_screen.dart';
 import '../../../../gen/assets/assets.gen.dart';
 import '../../../../gen/localization/l10n.dart';
 import '../../../course/views/pages/course_screen.dart';

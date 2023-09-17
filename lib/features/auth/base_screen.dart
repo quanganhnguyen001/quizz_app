@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:od/features/auth/cubit/auth_cubit.dart';
 
-import '../../../features/home/views/pages/home_screen.dart';
-import '../../../features/login/views/pages/login_screen.dart';
+import '../../../../features/home/views/pages/home_screen.dart';
+import '../../../../features/login/views/pages/login_screen.dart';
 
 class BaseScreen extends StatefulWidget {
   final Widget Function(BuildContext ctx) scaffold;

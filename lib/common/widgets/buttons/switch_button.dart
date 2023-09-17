@@ -5,7 +5,7 @@ import 'package:od/gen/assets/assets.gen.dart';
 
 import '../../../app/app_language/app_language_cubit.dart';
 import '../../../app/app_theme/app_theme_cubit.dart';
-import '../../../base_screen.dart';
+import '../../../features/auth/base_screen.dart';
 import '../../../gen/localization/l10n.dart';
 import '../../../theme/app_theme.dart';
 

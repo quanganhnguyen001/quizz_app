@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../features/question/models/questions_model.dart';
+import '../question/models/questions_model.dart';
 
 class QuestionRepo {
   final dio = Dio();

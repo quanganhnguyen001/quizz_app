@@ -7,7 +7,7 @@ import '../../../../../common/widgets/buttons/small_buttons_components.dart';
 import '../../../../../common/widgets/fields/textfield_components.dart';
 import '../../../../../theme/color_palettes.dart';
 import '../../../../../theme/typhography.dart';
-import '../../../../base_screen.dart';
+import '../../../auth/base_screen.dart';
 import '../../../../gen/assets/assets.gen.dart';
 import '../../../../gen/localization/l10n.dart';
 import '../../../login/views/pages/login_screen.dart';
