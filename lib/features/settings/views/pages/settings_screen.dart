@@ -12,6 +12,7 @@ import '../../../../gen/assets/assets.gen.dart';
 import '../../../../theme/app_theme.dart';
 import '../../../../theme/typhography.dart';
 import '../../../auth/entities/user_model.dart';
+import '../../../gg_maps/view/page/google_map_screen.dart';
 import '../../../update_profile/models/update_profile_arg.dart';
 import '../../../update_profile/views/pages/update_profile_widget.dart';
 
@@ -41,11 +42,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 16,
+              height: 10,
             ),
             Center(child: Assets.images.coolKidsOnBike.image()),
             const SizedBox(
-              height: 16,
+              height: 10,
             ),
             MenuItem(
               title: Str.of(context).change_language,
@@ -74,7 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             const SizedBox(
-              height: 16,
+              height: 10,
             ),
             MenuItem(
               title: Str.of(context).change_theme,
@@ -104,7 +105,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             const SizedBox(
-              height: 16,
+              height: 10,
             ),
             InkWell(
               onTap: () {
@@ -118,6 +119,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: Str.of(context).update_info,
                 icon: const Icon(Icons.person),
                 change: const Icon(Icons.arrow_forward_ios),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.of(context).pushNamed(GoogleMapScreen.routeName);
+              },
+              child: const MenuItem(
+                title: 'Google Maps',
+                icon: Icon(Icons.map),
+                change: Icon(Icons.arrow_forward_ios),
               ),
             )
           ],

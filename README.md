@@ -55,6 +55,19 @@
   </tr>
  </table>
 
+ <table>
+  <tr>
+    <td>Vị trí hiện tại</td>
+     <td>Tìm kiếm địa điểm
+     <td>Chỉ đường</td>
+  </tr>
+  <tr>
+    <td><img src="screenshot\current_location.png"></td>
+    <td><img src="screenshot\search_place.png" ></td>
+    <td><img src="screenshot\direction.png" ></td>
+  </tr>
+ </table>
+
 # Tính Năng của App 
 - Đăng nhập
 - Đăng ký
@@ -65,6 +78,9 @@
 - Nắm vững kiến thức Flutter bằng phương pháp trắc nghiệm 
 - Thêm, Sửa, Xóa công việc
 - Hỏi đáp với AI Chat Gpt
+- Xác định vị trí hiện tại
+- Tìm kiếm địa địa trên Google map
+- Chỉ dẫn đường đi trên Google map
  
 # Thông tin
 - Ứng dụngphát triển bằng framework Flutter và dùng Flutter_bloc để quản lý state của ứng dụng.

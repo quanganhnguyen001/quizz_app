@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../gen/assets/assets.gen.dart';
-import '../../repositories/chat_gpt_repo.dart';
+import '../../repository/chat_gpt_repo.dart';
 import '../../../../theme/typhography.dart';
 
 import '../models/chatgpt_message_model.dart';
