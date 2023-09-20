@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:od/features/gg_maps/cubit/google_map_cubit.dart';
 
 import '../../common/widgets/buttons/switch_button.dart';
 import '../../features/chat_gpt/cubit/chat_gpt_cubit.dart';
 import '../../features/chat_gpt/views/pages/chat_gpt_screen.dart';
 import '../../features/forgot_pass/cubit/forgot_pass_cubit.dart';
 import '../../features/forgot_pass/views/pages/forgot_password_screen.dart';
+import '../../features/gg_maps/view/page/google_map_screen.dart';
 import '../../features/home/cubit/home_cubit.dart';
 import '../../features/home/views/pages/home_screen.dart';
 
@@ -133,6 +135,15 @@ class OnGenerateRoute {
               child: EditTodo(arg: arg),
             );
           });
+    }
+    if (settings.name == GoogleMapScreen.routeName) {
+      return MaterialPageRoute(
+        settings: const RouteSettings(name: GoogleMapScreen.routeName),
+        builder: (_) => BlocProvider(
+          create: (context) => GoogleMapCubit(),
+          child: const GoogleMapScreen(),
+        ),
+      );
     }
 
     if (settings.name == HomeScreen.routeName) {

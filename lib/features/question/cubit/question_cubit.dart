@@ -2,7 +2,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:od/features/repositories/question_repo.dart';
+import 'package:od/features/repository/question_repo.dart';
 
 import '../models/questions_model.dart';
 import '../pages/widgets/results_widget.dart';
