@@ -15,7 +15,8 @@ import '../../features/login/cubit/login_cubit.dart';
 import '../../features/login/views/pages/login_screen.dart';
 import '../../features/onboarding/views/pages/onboard_screens.dart';
 import '../../features/question/cubit/question_cubit.dart';
-import '../../features/question/pages/question_screen.dart';
+
+import '../../features/question/views/pages/question_screen.dart';
 import '../../features/register/cubit/register_cubit.dart';
 import '../../features/register/views/pages/register_screen.dart';
 
