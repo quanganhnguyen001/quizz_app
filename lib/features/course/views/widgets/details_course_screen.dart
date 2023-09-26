@@ -6,7 +6,7 @@ import 'package:od/theme/typhography.dart';
 
 import '../../../../common/widgets/buttons/button_components.dart';
 import '../../../../common/widgets/buttons/header_buttons_components.dart';
-import '../../../question/pages/question_screen.dart';
+import '../../../question/views/pages/question_screen.dart';
 
 class DetailsCourseScreen extends StatelessWidget {
   const DetailsCourseScreen({super.key});

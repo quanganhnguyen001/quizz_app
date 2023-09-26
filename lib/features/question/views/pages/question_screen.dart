@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:od/features/question/pages/widgets/option_widget.dart';
 
 import 'package:od/gen/assets/assets.gen.dart';
 
@@ -8,7 +7,8 @@ import '../../../../common/widgets/buttons/button_components.dart';
 import '../../../../common/widgets/buttons/header_buttons_components.dart';
 import '../../../../theme/color_palettes.dart';
 import '../../../../theme/typhography.dart';
-import '../cubit/question_cubit.dart';
+import '../../cubit/question_cubit.dart';
+import '../widgets/option_widget.dart';
 
 class QuestionScreen extends StatefulWidget {
   static const String routeName = '/QuestionScreen';
