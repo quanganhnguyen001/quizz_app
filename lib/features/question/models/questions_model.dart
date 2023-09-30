@@ -24,4 +24,8 @@ class QuestionsModel {
       return QuestionsModel.fromJson(e);
     }).toList();
   }
+
+  @override
+  String toString() =>
+      'QuestionsModel(correctOption: $correctOption, options: $options, question: $question)';
 }
