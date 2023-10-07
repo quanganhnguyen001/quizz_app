@@ -1,10 +1,12 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 
 import '../question/models/questions_model.dart';
 
 class QuestionRepo {
   final dio = Dio();
-  Future<List<QuestionsModel>> getQuestion() async {
+  Future<List<QuestionModel>> getQuestion() async {
     try {
       final response = await dio.get(
           'https://quizzapp-d56de-default-rtdb.asia-southeast1.firebasedatabase.app/question.json');
@@ -13,7 +15,7 @@ class QuestionRepo {
       for (var e in json) {
         tempList.add(e);
       }
-      return QuestionsModel.questionFromjson(tempList);
+      return QuestionModel.questionFromjson(tempList);
     } catch (e) {
       rethrow;
     }
