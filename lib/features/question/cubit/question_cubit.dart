@@ -13,14 +13,14 @@ class QuestionCubit extends Cubit<QuestionState> {
   QuestionCubit() : super(const QuestionState(questionList: []));
   final controller = PageController();
 
-  Future<List<QuestionsModel>?> getAllQuestion() async {
+  Future<List<QuestionModel>?> getAllQuestion() async {
     try {
       final questionListSnapShot = await QuestionRepo().getQuestion();
-      List<QuestionsModel> questionList = questionListSnapShot
-          .map((e) => QuestionsModel(
+      List<QuestionModel> questionList = questionListSnapShot
+          .map((e) => QuestionModel(
                 question: e.question,
-                correctOption: e.correctOption,
                 options: e.options,
+                correctOption: e.correctOption,
               ))
           .toList();
       emit(QuestionState(questionList: questionList));

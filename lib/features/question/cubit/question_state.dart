@@ -6,13 +6,13 @@ class QuestionState extends Equatable {
       this.selectedAnswerIndex = -1,
       this.currentIndex = 0,
       this.score = 0});
-  final List<QuestionsModel> questionList;
+  final List<QuestionModel> questionList;
   final int selectedAnswerIndex;
   final int currentIndex;
   final int score;
 
   QuestionState copyWith({
-    List<QuestionsModel>? questionList,
+    List<QuestionModel>? questionList,
     int? selectedAnswerIndex,
     int? currentIndex,
     int? score,

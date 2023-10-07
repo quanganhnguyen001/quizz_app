@@ -1,31 +1,23 @@
-class QuestionsModel {
-  int? correctOption;
-  List? options;
-  String? question;
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'dart:convert';
 
-  QuestionsModel({this.correctOption, this.options, this.question});
+part 'questions_model.freezed.dart';
+part 'questions_model.g.dart';
 
-  QuestionsModel.fromJson(Map<String, dynamic> json) {
-    correctOption = json['correct_option'];
-    options = json['options'];
-    question = json['question'];
-  }
+@freezed
+class QuestionModel with _$QuestionModel {
+  const factory QuestionModel({
+    String? question,
+    List<String>? options,
+    @JsonKey(name: 'correct_option') int? correctOption,
+  }) = _QuestionModel;
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['correct_option'] = correctOption;
-    data['options'] = options;
-    data['question'] = question;
-    return data;
-  }
+  factory QuestionModel.fromJson(Map<String, dynamic> json) =>
+      _$QuestionModelFromJson(json);
 
-  static List<QuestionsModel> questionFromjson(List question) {
+  static List<QuestionModel> questionFromjson(List question) {
     return question.map((e) {
-      return QuestionsModel.fromJson(e);
+      return QuestionModel.fromJson(e);
     }).toList();
   }
-
-  @override
-  String toString() =>
-      'QuestionsModel(correctOption: $correctOption, options: $options, question: $question)';
 }
