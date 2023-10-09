@@ -67,8 +67,8 @@ class _ChatGptScreenState extends State<ChatGptScreen> {
                         itemCount: state.chatList.length,
                         itemBuilder: (context, index) {
                           return ChatWidget(
-                            message: state.chatList[index].message,
-                            chatIndex: state.chatList[index].chatIndex,
+                            message: state.chatList[index].content ?? '',
+                            chatIndex: state.chatList[index].index ?? 0,
                             showAnimate: state.chatList.length - 1 == index,
                           );
                         }),

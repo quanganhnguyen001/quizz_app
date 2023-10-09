@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:od/features/auth/cubit/auth_cubit.dart';
 
-import 'package:od/features/repository/auth_repo.dart';
+import 'package:od/features/service/auth/auth_service.dart';
 
 import '../../../../gen/assets/assets.gen.dart';
 import '../../../../theme/typhography.dart';
@@ -28,8 +28,9 @@ class LoginCubit extends Cubit<LoginState> {
     required BuildContext ctx,
   }) async {
     EasyLoading.show();
-    final Either<String, UserCredential> userCredential = await AuthRepo.login(
-        email: emailController.text, password: passwordController.text);
+    final Either<String, UserCredential> userCredential =
+        await AuthService.login(
+            email: emailController.text, password: passwordController.text);
     if (userCredential is Right<String, UserCredential>) {
       ctx.read<AuthCubit>().login(userCredential.value.user);
     } else if (userCredential is Left<String, UserCredential>) {

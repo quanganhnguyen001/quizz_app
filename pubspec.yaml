@@ -50,6 +50,7 @@ dependencies:
   google_maps_flutter: ^2.5.0
   geolocator: ^10.0.1
   http: ^1.1.0
+  retrofit: '>=4.0.0 <5.0.0'
   
   
 
@@ -90,6 +91,7 @@ dev_dependencies:
   flutter_gen_runner: ^5.3.1
   mockito: ^5.0.16
   mocktail: ^0.3.0
+  retrofit_generator: '>=7.0.0 <8.0.0'
 
   # For launcher icon
   flutter_launcher_icons: "^0.13.1"

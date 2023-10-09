@@ -1,12 +1,15 @@
-class ChatModel {
-  final String message;
-  final int chatIndex;
-  ChatModel({
-    required this.message,
-    required this.chatIndex,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  factory ChatModel.fromJson(Map<String, dynamic> json) {
-    return ChatModel(message: json['message'], chatIndex: json['chatIndex']);
-  }
+part 'chatgpt_message_model.freezed.dart';
+part 'chatgpt_message_model.g.dart';
+
+@freezed
+class ChatModel with _$ChatModel {
+  const factory ChatModel({
+    int? index,
+    String? content,
+  }) = _ChatModel;
+
+  factory ChatModel.fromJson(Map<String, dynamic> json) =>
+      _$ChatModelFromJson(json);
 }

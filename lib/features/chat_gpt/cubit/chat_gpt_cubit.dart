@@ -1,10 +1,12 @@
 // ignore: depend_on_referenced_packages
-import 'package:bloc/bloc.dart';
+
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../gen/assets/assets.gen.dart';
-import '../../repository/chat_gpt_repo.dart';
+import '../../service/chat_gpt/chat_gpt_service.dart';
 import '../../../../theme/typhography.dart';
 
 import '../models/chatgpt_message_model.dart';
@@ -41,11 +43,11 @@ class ChatGptCubit extends Cubit<ChatGptState> {
       String message = chatController.text;
       emit(state.copyWith(isTyping: true));
       List<ChatModel> updatedChatList = List.from(state.chatList);
-      updatedChatList.add(ChatModel(message: message, chatIndex: 0));
+      updatedChatList.add(ChatModel(content: message, index: 0));
       emit(state.copyWith(chatList: updatedChatList));
       chatController.clear();
 
-      updatedChatList.addAll(await ChatGptRepo().sendMessage(message: message));
+      updatedChatList.addAll(await sendMessageService(message));
 
       emit(state.copyWith(chatList: updatedChatList));
     } catch (e) {
@@ -77,5 +79,27 @@ class ChatGptCubit extends Cubit<ChatGptState> {
         listScrollController.position.maxScrollExtent,
         duration: const Duration(seconds: 2),
         curve: Curves.easeOut);
+  }
+
+  Future<List<ChatModel>> sendMessageService(String message) async {
+    try {
+      final response = await ChatGptService(Dio()).sendMessage({
+        'model': 'gpt-3.5-turbo',
+        'messages': [
+          {"role": "user", "content": message}
+        ],
+      });
+      List<ChatModel> listChat = [];
+      if (response['choices'].length > 0) {
+        listChat = List.generate(
+            response['choices'].length,
+            (index) => ChatModel(
+                content: response["choices"][index]["message"]['content'],
+                index: 1));
+      }
+      return listChat;
+    } catch (e) {
+      throw e.toString();
+    }
   }
 }

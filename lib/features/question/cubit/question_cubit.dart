@@ -1,8 +1,9 @@
 // ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:od/features/repository/question_repo.dart';
+import 'package:od/features/service/question/question_service.dart';
 
 import '../models/questions_model.dart';
 import '../views/widgets/results_widget.dart';
@@ -14,8 +15,9 @@ class QuestionCubit extends Cubit<QuestionState> {
   final controller = PageController();
 
   Future<List<QuestionModel>?> getAllQuestion() async {
+    final questionService = QuestionService(Dio());
     try {
-      final questionListSnapShot = await QuestionRepo().getQuestion();
+      final questionListSnapShot = await questionService.getQuestion();
       List<QuestionModel> questionList = questionListSnapShot
           .map((e) => QuestionModel(
                 question: e.question,
