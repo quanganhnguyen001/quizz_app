@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 part 'questions_model.freezed.dart';
 part 'questions_model.g.dart';
@@ -14,10 +13,4 @@ class QuestionModel with _$QuestionModel {
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) =>
       _$QuestionModelFromJson(json);
-
-  static List<QuestionModel> questionFromjson(List question) {
-    return question.map((e) {
-      return QuestionModel.fromJson(e);
-    }).toList();
-  }
 }
